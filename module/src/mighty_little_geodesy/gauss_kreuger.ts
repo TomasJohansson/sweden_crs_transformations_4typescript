@@ -1,4 +1,5 @@
 ﻿/*
+// TODO update the below Dart comments for this TypeScript project (ported from Dart/C#)
 * Copyright (c) Tomas Johansson , http://www.programmerare.com
 * The code in this library is licensed with MIT.
 * The library is based on the C#.NET library 'sweden_crs_transformations_4net' (https://github.com/TomasJohansson/sweden_crs_transformations_4net)
@@ -82,18 +83,20 @@
   * But later more changes of course when it was ported to the programming language Dart in this source file.
   * For details about changes, you should be able to use the github repository to see the git history where you found this source code file.
   */
-import 'dart:math' as math;
-import '../crs_projection.dart';
-import 'lat_lon.dart';
 
-class GaussKreuger
+ import { CrsProjection } from '../crs_projection';
+import LatLon from './lat_lon';
+
+type double = number;
+
+export default class GaussKreuger
 {
-  double _axis; // Semi-major axis of the ellipsoid.
-  double _flattening; // Flattening of the ellipsoid.
-  double _central_meridian; // Central meridian for the projection.    
-  double _scale; // Scale on central meridian.
-  double _false_northing; // Offset for origo.
-  double _false_easting; // Offset for origo.
+  private _axis: double = 0.0; // Semi-major axis of the ellipsoid.
+  private _flattening: double = 0.0; // Flattening of the ellipsoid.
+  private _central_meridian: double = 0.0; // Central meridian for the projection.    
+  private _scale: double = 0.0; // Scale on central meridian.
+  private _false_northing: double = 0.0; // Offset for origo.
+  private _false_easting: double = 0.0; // Offset for origo.
 
   /// Parameters for RT90 and SWEREF99TM.
   /// Note: Parameters for RT90 are choosen to eliminate the 
@@ -101,261 +104,259 @@ class GaussKreuger
   /// Bessel-variants should only be used if lat/long are given as
   /// RT90-lat/long based on the Bessel ellipsoide (from old maps).
   /// Parameter: projection (string). Must match if-statement.
-  void swedish_params(CrsProjection projection)
+  swedish_params(projection: CrsProjection): void
   {
     // RT90 parameters, GRS 80 ellipsoid.
     if (projection == CrsProjection.rt90_7_5_gon_v)
     {
-      _grs80_params();
-      _central_meridian = 11.0 + 18.375 / 60.0;
-      _scale = 1.000006000000;
-      _false_northing = -667.282;
-      _false_easting = 1500025.141;
+      this._grs80_params();
+      this._central_meridian = 11.0 + 18.375 / 60.0;
+      this._scale = 1.000006000000;
+      this._false_northing = -667.282;
+      this._false_easting = 1500025.141;
     }
     else if (projection == CrsProjection.rt90_5_0_gon_v)
     {
-      _grs80_params();
-      _central_meridian = 13.0 + 33.376 / 60.0;
-      _scale = 1.000005800000;
-      _false_northing = -667.130;
-      _false_easting = 1500044.695;
+      this._grs80_params();
+      this._central_meridian = 13.0 + 33.376 / 60.0;
+      this._scale = 1.000005800000;
+      this._false_northing = -667.130;
+      this._false_easting = 1500044.695;
     }
     else if (projection == CrsProjection.rt90_2_5_gon_v)
     {
-      _grs80_params();
-      _central_meridian = 15.0 + 48.0 / 60.0 + 22.624306 / 3600.0;
-      _scale = 1.00000561024;
-      _false_northing = -667.711;
-      _false_easting = 1500064.274;
+      this._grs80_params();
+      this._central_meridian = 15.0 + 48.0 / 60.0 + 22.624306 / 3600.0;
+      this._scale = 1.00000561024;
+      this._false_northing = -667.711;
+      this._false_easting = 1500064.274;
     }
     else if (projection == CrsProjection.rt90_0_0_gon_v)
     {
-      _grs80_params();
-      _central_meridian = 18.0 + 3.378 / 60.0;
-      _scale = 1.000005400000;
-      _false_northing = -668.844;
-      _false_easting = 1500083.521;
+      this._grs80_params();
+      this._central_meridian = 18.0 + 3.378 / 60.0;
+      this._scale = 1.000005400000;
+      this._false_northing = -668.844;
+      this._false_easting = 1500083.521;
     }
     else if (projection == CrsProjection.rt90_2_5_gon_o)
     {
-      _grs80_params();
-      _central_meridian = 20.0 + 18.379 / 60.0;
-      _scale = 1.000005200000;
-      _false_northing = -670.706;
-      _false_easting = 1500102.765;
+      this._grs80_params();
+      this._central_meridian = 20.0 + 18.379 / 60.0;
+      this._scale = 1.000005200000;
+      this._false_northing = -670.706;
+      this._false_easting = 1500102.765;
     }
     else if (projection == CrsProjection.rt90_5_0_gon_o)
     {
-      _grs80_params();
-      _central_meridian = 22.0 + 33.380 / 60.0;
-      _scale = 1.000004900000;
-      _false_northing = -672.557;
-      _false_easting = 1500121.846;
+      this._grs80_params();
+      this._central_meridian = 22.0 + 33.380 / 60.0;
+      this._scale = 1.000004900000;
+      this._false_northing = -672.557;
+      this._false_easting = 1500121.846;
     }
 
     // SWEREF99TM and SWEREF99ddmm  parameters.
     else if (projection == CrsProjection.sweref_99_tm)
     {
-      _sweref99_params();
-      _central_meridian = 15.00;
-      _scale = 0.9996;
-      _false_northing = 0.0;
-      _false_easting = 500000.0;
+      this._sweref99_params();
+      this._central_meridian = 15.00;
+      this._scale = 0.9996;
+      this._false_northing = 0.0;
+      this._false_easting = 500000.0;
     }
     else if (projection == CrsProjection.sweref_99_12_00)
     {
-      _sweref99_params();
-      _central_meridian = 12.00;
+      this._sweref99_params();
+      this._central_meridian = 12.00;
     }
     else if (projection == CrsProjection.sweref_99_13_30)
     {
-      _sweref99_params();
-      _central_meridian = 13.50;
+      this._sweref99_params();
+      this._central_meridian = 13.50;
     }
     else if (projection == CrsProjection.sweref_99_15_00)
     {
-      _sweref99_params();
-      _central_meridian = 15.00;
+      this._sweref99_params();
+      this._central_meridian = 15.00;
     }
     else if (projection == CrsProjection.sweref_99_16_30)
     {
-      _sweref99_params();
-      _central_meridian = 16.50;
+      this._sweref99_params();
+      this._central_meridian = 16.50;
     }
     else if (projection == CrsProjection.sweref_99_18_00)
     {
-      _sweref99_params();
-      _central_meridian = 18.00;
+      this._sweref99_params();
+      this._central_meridian = 18.00;
     }
     else if (projection == CrsProjection.sweref_99_14_15)
     {
-      _sweref99_params();
-      _central_meridian = 14.25;
+      this._sweref99_params();
+      this._central_meridian = 14.25;
     }
     else if (projection == CrsProjection.sweref_99_15_45)
     {
-      _sweref99_params();
-      _central_meridian = 15.75;
+      this._sweref99_params();
+      this._central_meridian = 15.75;
     }
     else if (projection == CrsProjection.sweref_99_17_15)
     {
-      _sweref99_params();
-      _central_meridian = 17.25;
+      this._sweref99_params();
+      this._central_meridian = 17.25;
     }
     else if (projection == CrsProjection.sweref_99_18_45)
     {
-      _sweref99_params();
-      _central_meridian = 18.75;
+      this._sweref99_params();
+      this._central_meridian = 18.75;
     }
     else if (projection == CrsProjection.sweref_99_20_15)
     {
-      _sweref99_params();
-      _central_meridian = 20.25;
+      this._sweref99_params();
+      this._central_meridian = 20.25;
     }
     else if (projection == CrsProjection.sweref_99_21_45)
     {
-      _sweref99_params();
-      _central_meridian = 21.75;
+      this._sweref99_params();
+      this._central_meridian = 21.75;
     }
     else if (projection == CrsProjection.sweref_99_23_15)
     {
-      _sweref99_params();
-      _central_meridian = 23.25;
+      this._sweref99_params();
+      this._central_meridian = 23.25;
     }
     else
     {
-      _central_meridian = double.minPositive;
+      this._central_meridian = Number.MIN_VALUE;
     }
   }
 
   /// Sets of default parameters.
-  void _grs80_params()
+  _grs80_params(): void
   {
-    _axis = 6378137.0; // GRS 80.
-    _flattening = 1.0 / 298.257222101; // GRS 80.
-    _central_meridian = double.minPositive;
+    this._axis = 6378137.0; // GRS 80.
+    this._flattening = 1.0 / 298.257222101; // GRS 80.
+    this._central_meridian = Number.MIN_VALUE;
   }
 
   /// Sets default parameters for sweref99.
-  void _sweref99_params()
+  _sweref99_params(): void
   {
-    _axis = 6378137.0; // GRS 80.
-    _flattening = 1.0 / 298.257222101; // GRS 80.
-    _central_meridian = double.minPositive;
-    _scale = 1.0;
-    _false_northing = 0.0;
-    _false_easting = 150000.0;
+    this._axis = 6378137.0; // GRS 80.
+    this._flattening = 1.0 / 298.257222101; // GRS 80.
+    this._central_meridian = Number.MIN_VALUE;
+    this._scale = 1.0;
+    this._false_northing = 0.0;
+    this._false_easting = 150000.0;
   }
 
   /// Conversion from geodetic coordinates to grid coordinates.
-  LatLon geodetic_to_grid(double latitude, double longitude) // public double[] geodetic_to_grid(double latitude, double longitude)
+  geodetic_to_grid(latitude: double, longitude: double): LatLon // public double[] geodetic_to_grid(double latitude, double longitude)
   {
-    List<double> x_y = [0.0, 0.0];
+    const x_y: Array<double> = [0.0, 0.0];
 
     // Prepare ellipsoid-based stuff.
-    double e2 = _flattening * (2.0 - _flattening);
-    double n = _flattening / (2.0 - _flattening);
-    double a_roof = _axis / (1.0 + n) * (1.0 + n * n / 4.0 + n * n * n * n / 64.0);
-    double A = e2;
-    double B = (5.0 * e2 * e2 - e2 * e2 * e2) / 6.0;
-    double C = (104.0 * e2 * e2 * e2 - 45.0 * e2 * e2 * e2 * e2) / 120.0;
-    double D = (1237.0 * e2 * e2 * e2 * e2) / 1260.0;
-    double beta1 = n / 2.0 - 2.0 * n * n / 3.0 + 5.0 * n * n * n / 16.0 + 41.0 * n * n * n * n / 180.0;
-    double beta2 = 13.0 * n * n / 48.0 - 3.0 * n * n * n / 5.0 + 557.0 * n * n * n * n / 1440.0;
-    double beta3 = 61.0 * n * n * n / 240.0 - 103.0 * n * n * n * n / 140.0;
-    double beta4 = 49561.0 * n * n * n * n / 161280.0;
+    const e2 = this._flattening * (2.0 - this._flattening);
+    const n = this._flattening / (2.0 - this._flattening);
+    const a_roof = this._axis / (1.0 + n) * (1.0 + n * n / 4.0 + n * n * n * n / 64.0);
+    const A = e2;
+    const B = (5.0 * e2 * e2 - e2 * e2 * e2) / 6.0;
+    const C = (104.0 * e2 * e2 * e2 - 45.0 * e2 * e2 * e2 * e2) / 120.0;
+    const D = (1237.0 * e2 * e2 * e2 * e2) / 1260.0;
+    const beta1 = n / 2.0 - 2.0 * n * n / 3.0 + 5.0 * n * n * n / 16.0 + 41.0 * n * n * n * n / 180.0;
+    const beta2 = 13.0 * n * n / 48.0 - 3.0 * n * n * n / 5.0 + 557.0 * n * n * n * n / 1440.0;
+    const beta3 = 61.0 * n * n * n / 240.0 - 103.0 * n * n * n * n / 140.0;
+    const beta4 = 49561.0 * n * n * n * n / 161280.0;
 
     // Convert.
-    double deg_to_rad = math.pi / 180.0;
-    double phi = latitude * deg_to_rad;
-    double lambda = longitude * deg_to_rad;
-    double lambda_zero = _central_meridian * deg_to_rad;
+    const deg_to_rad = Math.PI / 180.0;
+    const phi = latitude * deg_to_rad;
+    const lambda = longitude * deg_to_rad;
+    const lambda_zero = this._central_meridian * deg_to_rad;
 
-    double phi_star = phi - math.sin(phi) * math.cos(phi) * (A +
-                B * math.pow(math.sin(phi), 2) +
-                C * math.pow(math.sin(phi), 4) +
-                D * math.pow(math.sin(phi), 6));
-    double delta_lambda = lambda - lambda_zero;
-    double xi_prim = math.atan(math.tan(phi_star) / math.cos(delta_lambda));
-    double eta_prim = _math_atanh(math.cos(phi_star) * math.sin(delta_lambda));
-    double x = _scale * a_roof * (xi_prim +
-                beta1 * math.sin(2.0 * xi_prim) * _math_cosh(2.0 * eta_prim) +
-                beta2 * math.sin(4.0 * xi_prim) * _math_cosh(4.0 * eta_prim) +
-                beta3 * math.sin(6.0 * xi_prim) * _math_cosh(6.0 * eta_prim) +
-                beta4 * math.sin(8.0 * xi_prim) * _math_cosh(8.0 * eta_prim)) +
-                _false_northing;
-    double y = _scale * a_roof * (eta_prim +
-                beta1 * math.cos(2.0 * xi_prim) * _math_sinh(2.0 * eta_prim) +
-                beta2 * math.cos(4.0 * xi_prim) * _math_sinh(4.0 * eta_prim) +
-                beta3 * math.cos(6.0 * xi_prim) * _math_sinh(6.0 * eta_prim) +
-                beta4 * math.cos(8.0 * xi_prim) * _math_sinh(8.0 * eta_prim)) +
-                _false_easting;
-    x_y[0] = ((x * 1000.0)).roundToDouble() / 1000.0;
-    x_y[1] = ((y * 1000.0)).roundToDouble() / 1000.0;
-    var latLon = LatLon(x_y[0], x_y[1]);
-    return latLon; //return x_y;
+    const phi_star = phi - Math.sin(phi) * Math.cos(phi) * (A +
+                B * Math.pow(Math.sin(phi), 2) +
+                C * Math.pow(Math.sin(phi), 4) +
+                D * Math.pow(Math.sin(phi), 6));
+    const delta_lambda = lambda - lambda_zero;
+    const xi_prim = Math.atan(Math.tan(phi_star) / Math.cos(delta_lambda));
+    const eta_prim = this._math_atanh(Math.cos(phi_star) * Math.sin(delta_lambda));
+    const x = this._scale * a_roof * (xi_prim +
+                beta1 * Math.sin(2.0 * xi_prim) * this._math_cosh(2.0 * eta_prim) +
+                beta2 * Math.sin(4.0 * xi_prim) * this._math_cosh(4.0 * eta_prim) +
+                beta3 * Math.sin(6.0 * xi_prim) * this._math_cosh(6.0 * eta_prim) +
+                beta4 * Math.sin(8.0 * xi_prim) * this._math_cosh(8.0 * eta_prim)) +
+                this._false_northing;
+    const y = this._scale * a_roof * (eta_prim +
+                beta1 * Math.cos(2.0 * xi_prim) * this._math_sinh(2.0 * eta_prim) +
+                beta2 * Math.cos(4.0 * xi_prim) * this._math_sinh(4.0 * eta_prim) +
+                beta3 * Math.cos(6.0 * xi_prim) * this._math_sinh(6.0 * eta_prim) +
+                beta4 * Math.cos(8.0 * xi_prim) * this._math_sinh(8.0 * eta_prim)) +
+                this._false_easting;
+    x_y[0] = Math.round((x * 1000.0)) / 1000.0;
+    x_y[1] = Math.round((y * 1000.0)) / 1000.0;
+    return new LatLon(x_y[0], x_y[1]);
   }
 
   /// Conversion from grid coordinates to geodetic coordinates.
-  LatLon grid_to_geodetic(double yLatitude, double xLongitude) // public double[] grid_to_geodetic(double yLatitude, double xLongitude)
+  grid_to_geodetic(yLatitude: double, xLongitude: double): LatLon // public double[] grid_to_geodetic(double yLatitude, double xLongitude)
   {
-    List<double> lat_lon = [0.0, 0.0];
-    if (_central_meridian == double.minPositive)
+    const lat_lon: Array<double> = [0.0, 0.0];
+    if (this._central_meridian == Number.MIN_VALUE)
     {
-      return LatLon(lat_lon[1], lat_lon[0]);
+      return new LatLon(lat_lon[1], lat_lon[0]);
     }
     // Prepare ellipsoid-based stuff.
-    double e2 = _flattening * (2.0 - _flattening);
-    double n = _flattening / (2.0 - _flattening);
-    double a_roof = _axis / (1.0 + n) * (1.0 + n * n / 4.0 + n * n * n * n / 64.0);
-    double delta1 = n / 2.0 - 2.0 * n * n / 3.0 + 37.0 * n * n * n / 96.0 - n * n * n * n / 360.0;
-    double delta2 = n * n / 48.0 + n * n * n / 15.0 - 437.0 * n * n * n * n / 1440.0;
-    double delta3 = 17.0 * n * n * n / 480.0 - 37 * n * n * n * n / 840.0;
-    double delta4 = 4397.0 * n * n * n * n / 161280.0;
+    const e2 = this._flattening * (2.0 - this._flattening);
+    const n = this._flattening / (2.0 - this._flattening);
+    const a_roof = this._axis / (1.0 + n) * (1.0 + n * n / 4.0 + n * n * n * n / 64.0);
+    const delta1 = n / 2.0 - 2.0 * n * n / 3.0 + 37.0 * n * n * n / 96.0 - n * n * n * n / 360.0;
+    const delta2 = n * n / 48.0 + n * n * n / 15.0 - 437.0 * n * n * n * n / 1440.0;
+    const delta3 = 17.0 * n * n * n / 480.0 - 37 * n * n * n * n / 840.0;
+    const delta4 = 4397.0 * n * n * n * n / 161280.0;
 
-    double Astar = e2 + e2 * e2 + e2 * e2 * e2 + e2 * e2 * e2 * e2;
-    double Bstar = -(7.0 * e2 * e2 + 17.0 * e2 * e2 * e2 + 30.0 * e2 * e2 * e2 * e2) / 6.0;
-    double Cstar = (224.0 * e2 * e2 * e2 + 889.0 * e2 * e2 * e2 * e2) / 120.0;
-    double Dstar = -(4279.0 * e2 * e2 * e2 * e2) / 1260.0;
+    const Astar = e2 + e2 * e2 + e2 * e2 * e2 + e2 * e2 * e2 * e2;
+    const Bstar = -(7.0 * e2 * e2 + 17.0 * e2 * e2 * e2 + 30.0 * e2 * e2 * e2 * e2) / 6.0;
+    const Cstar = (224.0 * e2 * e2 * e2 + 889.0 * e2 * e2 * e2 * e2) / 120.0;
+    const Dstar = -(4279.0 * e2 * e2 * e2 * e2) / 1260.0;
 
     // Convert.
-    double deg_to_rad = math.pi / 180;
-    double lambda_zero = _central_meridian * deg_to_rad;
-    double xi = (yLatitude - _false_northing) / (_scale * a_roof);
-    double eta = (xLongitude - _false_easting) / (_scale * a_roof);
-    double xi_prim = xi -
-                    delta1 * math.sin(2.0 * xi) * _math_cosh(2.0 * eta) -
-                    delta2 * math.sin(4.0 * xi) * _math_cosh(4.0 * eta) -
-                    delta3 * math.sin(6.0 * xi) * _math_cosh(6.0 * eta) -
-                    delta4 * math.sin(8.0 * xi) * _math_cosh(8.0 * eta);
-    double eta_prim = eta -
-                    delta1 * math.cos(2.0 * xi) * _math_sinh(2.0 * eta) -
-                    delta2 * math.cos(4.0 * xi) * _math_sinh(4.0 * eta) -
-                    delta3 * math.cos(6.0 * xi) * _math_sinh(6.0 * eta) -
-                    delta4 * math.cos(8.0 * xi) * _math_sinh(8.0 * eta);
-    double phi_star = math.asin(math.sin(xi_prim) / _math_cosh(eta_prim));
-    double delta_lambda = math.atan(_math_sinh(eta_prim) / math.cos(xi_prim));
-    double lon_radian = lambda_zero + delta_lambda;
-    double lat_radian = phi_star + math.sin(phi_star) * math.cos(phi_star) *
+    const deg_to_rad = Math.PI / 180;
+    const lambda_zero = this._central_meridian * deg_to_rad;
+    const xi = (yLatitude - this._false_northing) / (this._scale * a_roof);
+    const eta = (xLongitude - this._false_easting) / (this._scale * a_roof);
+    const xi_prim = xi -
+                    delta1 * Math.sin(2.0 * xi) * this._math_cosh(2.0 * eta) -
+                    delta2 * Math.sin(4.0 * xi) * this._math_cosh(4.0 * eta) -
+                    delta3 * Math.sin(6.0 * xi) * this._math_cosh(6.0 * eta) -
+                    delta4 * Math.sin(8.0 * xi) * this._math_cosh(8.0 * eta);
+    const eta_prim = eta -
+                    delta1 * Math.cos(2.0 * xi) * this._math_sinh(2.0 * eta) -
+                    delta2 * Math.cos(4.0 * xi) * this._math_sinh(4.0 * eta) -
+                    delta3 * Math.cos(6.0 * xi) * this._math_sinh(6.0 * eta) -
+                    delta4 * Math.cos(8.0 * xi) * this._math_sinh(8.0 * eta);
+    const phi_star = Math.asin(Math.sin(xi_prim) / this._math_cosh(eta_prim));
+    const delta_lambda = Math.atan(this._math_sinh(eta_prim) / Math.cos(xi_prim));
+    const lon_radian = lambda_zero + delta_lambda;
+    const lat_radian = phi_star + Math.sin(phi_star) * Math.cos(phi_star) *
                     (Astar +
-                      Bstar * math.pow(math.sin(phi_star), 2) +
-                      Cstar * math.pow(math.sin(phi_star), 4) +
-                      Dstar * math.pow(math.sin(phi_star), 6));
-    lat_lon[0] = lat_radian * 180.0 / math.pi;
-    lat_lon[1] = lon_radian * 180.0 / math.pi;
-    var latLon = LatLon(lat_lon[0], lat_lon[1]);
-    return latLon; // return lat_lon;
+                      Bstar * Math.pow(Math.sin(phi_star), 2) +
+                      Cstar * Math.pow(Math.sin(phi_star), 4) +
+                      Dstar * Math.pow(Math.sin(phi_star), 6));
+    lat_lon[0] = lat_radian * 180.0 / Math.PI;
+    lat_lon[1] = lon_radian * 180.0 / Math.PI;
+    return new LatLon(lat_lon[0], lat_lon[1]);
   }
 
 
-  double _math_sinh(double value) {
-    return 0.5 * (math.exp(value) - math.exp(-value));
+  _math_sinh(value: double): double {
+    return 0.5 * (Math.exp(value) - Math.exp(-value));
   }
-  double _math_cosh(double value) {
-    return 0.5 * (math.exp(value) + math.exp(-value));
+  _math_cosh(value: double): double {
+    return 0.5 * (Math.exp(value) + Math.exp(-value));
   }
-  double _math_atanh(double value) {
-    return 0.5 * math.log((1.0 + value) / (1.0 - value));
+  _math_atanh(value: double): double {
+    return 0.5 * Math.log((1.0 + value) / (1.0 - value));
   }
 
 }
