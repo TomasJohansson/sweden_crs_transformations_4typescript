@@ -1,4 +1,5 @@
 ﻿/*
+// TODO update the below Dart comments for this TypeScript project (ported from Dart/C#)
 * Copyright (c) Tomas Johansson , http://www.programmerare.com
 * The code in this library is licensed with MIT.
 * The library is based on the C#.NET library 'sweden_crs_transformations_4net' (https://github.com/TomasJohansson/sweden_crs_transformations_4net)
@@ -13,9 +14,6 @@
 /// Helper class for the 'GaussKreuger' class.
 /// This class was not part of the original 'MightyLittleGeodesy'
 /// but the class 'GaussKreuger' has later been changed to return this 'LatLon' instead of array 'double[]'
-class LatLon {
-  double xLongitude;
-  double yLatitude;
-  
-  LatLon(this.yLatitude, this.xLongitude);
+export default class LatLon {
+  constructor(readonly yLatitude: number, readonly xLongitude: number) {}
 }
