@@ -4,7 +4,7 @@
   "description": "TODO",
   "main": "index.js",
   "scripts": {
-    "test": "TODO"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
