@@ -24,7 +24,7 @@
 /// https://en.wikipedia.org/wiki/EPSG_Geodetic_Parameter_Dataset
 /// https://epsg.org
 /// https://epsg.io
-enum CrsProjection {
+export enum CrsProjection {
 
   // Note that Dart enums can not define values, but the values ("index" property) are instead 
   // enumerated, beginning with 0 for the first enum, and 1 for the second, and so on.
@@ -38,40 +38,40 @@ enum CrsProjection {
   /// https://epsg.io/4326
   /// https://spatialreference.org/ref/epsg/4326/
   /// https://en.wikipedia.org/wiki/World_Geodetic_System#A_new_World_Geodetic_System:_WGS_84
-  wgs84, //  = 4326,
+  wgs84 = 4326,
 
   /// "SWEREF 99 TM" (with EPSG code 3006) is the new national projection.
   /// https://www.lantmateriet.se/sv/Kartor-och-geografisk-information/gps-geodesi-och-swepos/referenssystem/tvadimensionella-system/sweref-99-projektioner/
   /// https://epsg.org/crs_3006/SWEREF99-TM.html
   /// https://epsg.io/3006
   /// https://spatialreference.org/ref/epsg/3006/
-  sweref_99_tm, // = 3006, // national sweref99 CRS
+  sweref_99_tm = 3006, // national sweref99 CRS
 
   // local sweref99 systems (the new swedish national system):
-  sweref_99_12_00, // = 3007,
-  sweref_99_13_30, // = 3008,
-  sweref_99_15_00, // = 3009,
-  sweref_99_16_30, // = 3010,
-  sweref_99_18_00, // = 3011,
-  sweref_99_14_15, // = 3012,
-  sweref_99_15_45, // = 3013,
-  sweref_99_17_15, // = 3014,
-  sweref_99_18_45, // = 3015,
-  sweref_99_20_15, // = 3016,
-  sweref_99_21_45, // = 3017,
-  sweref_99_23_15, // = 3018,
+  sweref_99_12_00 = 3007,
+  sweref_99_13_30 = 3008,
+  sweref_99_15_00 = 3009,
+  sweref_99_16_30 = 3010,
+  sweref_99_18_00 = 3011,
+  sweref_99_14_15 = 3012,
+  sweref_99_15_45 = 3013,
+  sweref_99_17_15 = 3014,
+  sweref_99_18_45 = 3015,
+  sweref_99_20_15 = 3016,
+  sweref_99_21_45 = 3017,
+  sweref_99_23_15 = 3018,
 
 
   // local RT90 systems (the old swedish national system):
-  rt90_7_5_gon_v, // = 3019,
-  rt90_5_0_gon_v, // = 3020,
+  rt90_7_5_gon_v = 3019,
+  rt90_5_0_gon_v = 3020,
 
   /// https://epsg.org/crs_3021/RT90-2-5-gon-V.html
   /// https://epsg.io/3021
   /// https://spatialreference.org/ref/epsg/3021/
-  rt90_2_5_gon_v, // = 3021,
+  rt90_2_5_gon_v = 3021,
 
-  rt90_0_0_gon_v, // = 3022,
-  rt90_2_5_gon_o, // = 3023,
-  rt90_5_0_gon_o  // = 3024
+  rt90_0_0_gon_v = 3022,
+  rt90_2_5_gon_o = 3023,
+  rt90_5_0_gon_o = 3024
 }
