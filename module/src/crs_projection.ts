@@ -82,10 +82,40 @@ export class CrsProjection {
   static rt90_5_0_gon_o = new CrsProjection(3024);
 
   // ------------------------------------------------------
-  // TODO: Add methods here i.e. those methods which were extension methods for the Dart enum,
-  // but now with TypeScript they can be methods since the type has now been implemented as a class above
-  // e.g. these methods:
-    // bool isWgs84()
-    // bool isSweref()
-    // bool isRT90()
+
+  isWgs84(): boolean { // this CrsProjection crsProjection
+    return this == CrsProjection.wgs84;
+  }
+
+  /// True if the coordinate reference system is a version of SWEREF99.
+  isSweref(): boolean {
+    return CrsProjection._epsgLowerValueForSweref <= this.epsgNumber && this.epsgNumber <= CrsProjection._epsgUpperValueForSweref;
+  }
+
+  /// True if the coordinate reference system is a version of RT90.
+  isRT90(): boolean {
+    return CrsProjection._epsgLowerValueForRT90 <= this.epsgNumber && this.epsgNumber <= CrsProjection._epsgUpperValueForRT90;
+  } 
+
+  // TODO implement the below method later (it has been copied from the Dart file 'src\crs_projection_extensions.dart')
+  /// A string representation of an enum instance.
+  /// The string returned is the same as the name but uppercased, e.g. wgs84 ==> "WGS84"
+  // String getAsString() {
+  //   String enumTypenameAndInstanceNameSeparatedWithDot = toString(); // something like "CrsProjection.sweref_99_18_00"
+  //   int indexOfTheDot = enumTypenameAndInstanceNameSeparatedWithDot.indexOf('.');
+  //   String instanceName = enumTypenameAndInstanceNameSeparatedWithDot.substring(indexOfTheDot + 1);
+  //   // print("instanceName " + instanceName); // e.g. "sweref_99_18_00"
+  //   return instanceName.toUpperCase(); // e.g. "SWEREF_99_18_00"
+  // }  
+
+  private static readonly _epsgForWgs84 = 4326;
+
+  private static readonly _epsgLowerValueForSweref = 3006; // Sweref99tm
+  private static readonly _epsgUpperValueForSweref = 3018;
+
+  private static readonly _epsgLowerValueForRT90 = 3019;
+  private static readonly _epsgUpperValueForRT90 = 3024;
+
+  // the swedish projections start at index 1 (in the enum _CrsProjection) with EPSG number 3006 (i.e. the difference is 3006-1)
+  private static readonly _differenceBetweenEnumIndexAndEspgNumber = 3005;
 }
