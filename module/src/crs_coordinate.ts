@@ -11,6 +11,7 @@
 */
 
 import {CrsProjection} from './crs_projection';
+import Transformer from './transformation/transformer';
 //import 'transformation/transformer.dart';
 
 /// Used for supporting a custom toString implementation
@@ -69,20 +70,18 @@ export default class CrsCoordinate {
   // -----------------------------------------------
 
 
-  // TODO implement 'Transformer' with TypeScript to be able to imlement the two methods below
-
   /// Transforms the coordinate to another coordinate reference system.
   /// [targetCrsProjection] represents the coordinate reference system that you want to transform to.
-  // transform(targetCrsProjection: CrsProjection): CrsCoordinate {
-  //   return Transformer.transform(this, targetCrsProjection);
-  // }
+  transform(targetCrsProjection: CrsProjection): CrsCoordinate {
+    return Transformer.transform(this, targetCrsProjection);
+  }
 
   /// Transforms the coordinate to another coordinate reference system.
   /// [targetEpsgNumber] represents the coordinate reference system that you want to transform to.
-  // CrsCoordinate transformByEpsgNumber(int targetEpsgNumber) {
-  //   CrsProjection targetCrsProjection = CrsProjectionFactory.getCrsProjectionByEpsgNumber(targetEpsgNumber);
-  //   return transform(targetCrsProjection);
-  // }
+  transformByEpsgNumber(targetEpsgNumber: int): CrsCoordinate {
+    const targetCrsProjection: CrsProjection = CrsProjection.getCrsProjectionByEpsgNumber(targetEpsgNumber);
+    return this.transform(targetCrsProjection);
+  }
 
 
   // Two methods/properties from Dart below  ('operator ==' and 'hashCode') 

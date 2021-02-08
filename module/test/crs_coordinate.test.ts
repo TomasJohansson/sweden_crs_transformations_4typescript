@@ -37,8 +37,6 @@ test('transform', () => {
     stockholmCentralStation_RT90_easting
   );
 
-  /*
-  TODO implement transform method and then enable the code below
   // Transformations to WGS84 (from SWEREF99TM and RT90):
   _AssertEqual(
     stockholmWGS84, // expected WGS84
@@ -77,9 +75,7 @@ test('transform', () => {
     stockholmRT90,  // expected RT90
     stockholmSWEREF99TM.transform(CrsProjection.rt90_2_5_gon_v) // actual/transformed RT90
   );
-  */
 });
-
 
 test('createCoordinateByEpsgNumber', () => {
   const x = 20.0;

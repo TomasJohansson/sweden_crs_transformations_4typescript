@@ -18,9 +18,6 @@ import TransformStrategy_from_SWEREF99_or_RT90_to_WGS84 from './transform_strate
 import TransformStrategy_from_WGS84_to_SWEREF99_or_RT90 from './transform_strategy_from_wgs84_to_sweref99_or_rt90';
 import TransFormStrategy_From_Sweref99OrRT90_to_WGS84_andThenToRealTarget from './transform_strategy_from_sweref99_or_rt90_to_wgs84_and_then_to_real_target';
 
-import './transform_strategy_from_sweref99_or_rt90_to_wgs84_and_then_to_real_target.dart';
-import './transform_strategy_from_wgs84_to_sweref99_or_rt90.dart';
-
 /// Intended to be an internal class, i.e. not exported from the library (i.e. in the file 'sweden_crs_transformations_4dart.dart')
 export default class Transformer {
 
