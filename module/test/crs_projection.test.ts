@@ -1,5 +1,5 @@
 ﻿import { CrsProjection } from '../src/crs_projection';
-// import Assert from './dot_net_helpers'; // TODO, but currently the Assert class was added at the bottom
+// import Assert from './dot_net_helpers'; // TODO, but currently the Assert class was added at the bottom 
 
 const epsgNumberForWgs84 = 4326;
 const epsgNumberForSweref99tm = 3006; // https://epsg.org/crs_3006/SWEREF99-TM.html
@@ -130,15 +130,13 @@ test('isRT90', () => {
 // }); 
 
 // This class below is copied and modified (from Dart to TypeScript) from 'dot_net_helpers.dart'
-// TODO move into 'dot_net_helpers.ts'
-// (the reason for it is that the code was ported from C# and is convenient to use the same assertions
-//  i.e. less code to modify ... )
+// TODO move into 'dot_net_helpers.ts' after it has been renamed to ts
 class Assert {
   // https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.testtools.unittesting.assert.areequal?view=mstest-net-1.3.2#Microsoft_VisualStudio_TestTools_UnitTesting_Assert_AreEqual_System_Object_System_Object_
   // public static void AreEqual (object expected, object actual);
   static AreEqual(expected: Object, actual: Object): void {
     // The parameters of the .NET class is as in the above order (actual, expected)
-    // while "actual" is the first parameter for Dart test function "expect" as below.
+    // while "actual" is the first parameter for TypeScript test function "expect" as below.
     expect(actual).toEqual(expected);
   }
 
