@@ -97,16 +97,25 @@ export class CrsProjection {
     return CrsProjection._epsgLowerValueForRT90 <= this.epsgNumber && this.epsgNumber <= CrsProjection._epsgUpperValueForRT90;
   } 
 
-  // TODO implement the below method later (it has been copied from the Dart file 'src\crs_projection_extensions.dart')
   /// A string representation of an enum instance.
   /// The string returned is the same as the name but uppercased, e.g. wgs84 ==> "WGS84"
-  // String getAsString() {
-  //   String enumTypenameAndInstanceNameSeparatedWithDot = toString(); // something like "CrsProjection.sweref_99_18_00"
-  //   int indexOfTheDot = enumTypenameAndInstanceNameSeparatedWithDot.indexOf('.');
-  //   String instanceName = enumTypenameAndInstanceNameSeparatedWithDot.substring(indexOfTheDot + 1);
-  //   // print("instanceName " + instanceName); // e.g. "sweref_99_18_00"
-  //   return instanceName.toUpperCase(); // e.g. "SWEREF_99_18_00"
-  // }  
+  getAsString(): string {
+    // Are the below 'Object.keys' and the 'Object.values' guaranteed to be returned in the same order?
+    // This is assumed further down !
+    let allKeys: string[] = Object.keys(CrsProjection);   
+    let allValues: any[] = Object.values(CrsProjection);
+    // TODO this should be implemented in a better way
+    if(allValues.length != allKeys.length) {
+      throw new Error("not equal length of keys and values in CrsProjection");
+    }
+    for(let i=0; i<allValues.length; i++) {
+      const theValue = allValues[i] as CrsProjection;
+      if(this.getEpsgNumber() === theValue.getEpsgNumber()) {
+        return allKeys[i].toUpperCase();    
+      }      
+    }
+    throw Error(`Could not render the CrsProjection as a string. The EPSG number for the failed projection: ${this.getEpsgNumber()}`);
+  }  
 
   private static readonly _epsgForWgs84 = 4326;
 
