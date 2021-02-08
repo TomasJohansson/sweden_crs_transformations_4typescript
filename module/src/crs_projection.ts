@@ -24,7 +24,7 @@
 /// https://en.wikipedia.org/wiki/EPSG_Geodetic_Parameter_Dataset
 /// https://epsg.org
 /// https://epsg.io
-export class CrsProjection {
+export default class CrsProjection {
 
   private constructor(private epsgNumber: number) { }
     

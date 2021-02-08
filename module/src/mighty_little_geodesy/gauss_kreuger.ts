@@ -84,7 +84,7 @@
   * For details about changes, you should be able to use the github repository to see the git history where you found this source code file.
   */
 
- import { CrsProjection } from '../crs_projection';
+ import CrsProjection from '../crs_projection';
 import LatLon from './lat_lon';
 
 type double = number;

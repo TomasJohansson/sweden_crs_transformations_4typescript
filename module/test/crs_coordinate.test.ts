@@ -1,5 +1,5 @@
 ﻿import CrsCoordinate from '../src/crs_coordinate';
-import { CrsProjection } from '../src/crs_projection';
+import CrsProjection from '../src/crs_projection';
 
 const epsgNumberForSweref99tm = 3006; // https://epsg.org/crs_3006/SWEREF99-TM.html
 

@@ -1,6 +1,6 @@
 ﻿import LatLon from '../../src/mighty_little_geodesy/lat_lon';
 import GaussKreuger from '../../src/mighty_little_geodesy/gauss_kreuger';
-import { CrsProjection } from '../../src/crs_projection';
+import CrsProjection from '../../src/crs_projection';
 
 // https://kartor.eniro.se/m/XRCfh
     //WGS84 decimal (lat, lon)      59.330231, 18.059196

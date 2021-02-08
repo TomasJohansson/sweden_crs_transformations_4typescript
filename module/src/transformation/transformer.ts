@@ -12,7 +12,7 @@
 */
 
 import CrsCoordinate from '../crs_coordinate';
-import { CrsProjection } from '../crs_projection';
+import CrsProjection from '../crs_projection';
 import TransformStrategy from './transform_strategy';
 import TransformStrategy_from_SWEREF99_or_RT90_to_WGS84 from './transform_strategy_from_sweref99_or_rt90_to_wgs84';
 import TransformStrategy_from_WGS84_to_SWEREF99_or_RT90 from './transform_strategy_from_wgs84_to_sweref99_or_rt90';

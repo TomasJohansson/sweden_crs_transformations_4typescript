@@ -10,7 +10,7 @@
 * https://github.com/TomasJohansson/sweden_crs_transformations_4dart
 */
 
-import {CrsProjection} from './crs_projection';
+import CrsProjection from './crs_projection';
 import Transformer from './transformation/transformer';
 //import 'transformation/transformer.dart';
 

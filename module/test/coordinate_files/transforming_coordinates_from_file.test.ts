@@ -1,6 +1,6 @@
 ﻿// dart test/coordinate_files/transforming_coordinates_from_file_test.dart
 import CrsCoordinate from "../../src/crs_coordinate";
-import { CrsProjection } from "../../src/crs_projection";
+import CrsProjection from "../../src/crs_projection";
 import fs from 'fs';
 import path from 'path';
 

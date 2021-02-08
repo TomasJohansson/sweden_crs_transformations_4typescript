@@ -12,7 +12,7 @@
 */
 
 import CrsCoordinate from '../crs_coordinate';
-import { CrsProjection } from '../crs_projection';
+import CrsProjection from '../crs_projection';
 import TransformStrategy from './transform_strategy';
 import GaussKreuger from '../mighty_little_geodesy/gauss_kreuger';
 import LatLon from '../mighty_little_geodesy/lat_lon';

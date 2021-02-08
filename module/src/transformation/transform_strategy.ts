@@ -12,7 +12,7 @@
 */
 
 import CrsCoordinate from '../crs_coordinate';
-import {CrsProjection} from '../crs_projection';
+import CrsProjection from '../crs_projection';
 
 /// Intended to be an internal class, i.e. not exported from the library (i.e. in the file 'sweden_crs_transformations_4dart.dart')
 export default interface TransformStrategy {
