@@ -24,7 +24,13 @@
 /// https://en.wikipedia.org/wiki/EPSG_Geodetic_Parameter_Dataset
 /// https://epsg.org
 /// https://epsg.io
-export enum CrsProjection {
+export class CrsProjection {
+
+  private constructor(private epsgNumber: number) { }
+    
+  public getEpsgNumber(): number {
+    return this.epsgNumber;
+  }  
 
   // Note that Dart enums can not define values, but the values ("index" property) are instead 
   // enumerated, beginning with 0 for the first enum, and 1 for the second, and so on.
@@ -38,40 +44,48 @@ export enum CrsProjection {
   /// https://epsg.io/4326
   /// https://spatialreference.org/ref/epsg/4326/
   /// https://en.wikipedia.org/wiki/World_Geodetic_System#A_new_World_Geodetic_System:_WGS_84
-  wgs84 = 4326,
+  static wgs84 = new CrsProjection(4326);
 
   /// "SWEREF 99 TM" (with EPSG code 3006) is the new national projection.
   /// https://www.lantmateriet.se/sv/Kartor-och-geografisk-information/gps-geodesi-och-swepos/referenssystem/tvadimensionella-system/sweref-99-projektioner/
   /// https://epsg.org/crs_3006/SWEREF99-TM.html
   /// https://epsg.io/3006
   /// https://spatialreference.org/ref/epsg/3006/
-  sweref_99_tm = 3006, // national sweref99 CRS
+  static sweref_99_tm = new CrsProjection(3006); // national sweref99 CRS
 
   // local sweref99 systems (the new swedish national system):
-  sweref_99_12_00 = 3007,
-  sweref_99_13_30 = 3008,
-  sweref_99_15_00 = 3009,
-  sweref_99_16_30 = 3010,
-  sweref_99_18_00 = 3011,
-  sweref_99_14_15 = 3012,
-  sweref_99_15_45 = 3013,
-  sweref_99_17_15 = 3014,
-  sweref_99_18_45 = 3015,
-  sweref_99_20_15 = 3016,
-  sweref_99_21_45 = 3017,
-  sweref_99_23_15 = 3018,
+  static sweref_99_12_00 = new CrsProjection(3007);
+  static sweref_99_13_30 = new CrsProjection(3008);
+  static sweref_99_15_00 = new CrsProjection(3009);
+  static sweref_99_16_30 = new CrsProjection(3010);
+  static sweref_99_18_00 = new CrsProjection(3011);
+  static sweref_99_14_15 = new CrsProjection(3012);
+  static sweref_99_15_45 = new CrsProjection(3013);
+  static sweref_99_17_15 = new CrsProjection(3014);
+  static sweref_99_18_45 = new CrsProjection(3015);
+  static sweref_99_20_15 = new CrsProjection(3016);
+  static sweref_99_21_45 = new CrsProjection(3017);
+  static sweref_99_23_15 = new CrsProjection(3018);
 
 
   // local RT90 systems (the old swedish national system):
-  rt90_7_5_gon_v = 3019,
-  rt90_5_0_gon_v = 3020,
+  static rt90_7_5_gon_v = new CrsProjection(3019);
+  static rt90_5_0_gon_v = new CrsProjection(3020);
 
   /// https://epsg.org/crs_3021/RT90-2-5-gon-V.html
   /// https://epsg.io/3021
   /// https://spatialreference.org/ref/epsg/3021/
-  rt90_2_5_gon_v = 3021,
+  static rt90_2_5_gon_v = new CrsProjection(3021);
 
-  rt90_0_0_gon_v = 3022,
-  rt90_2_5_gon_o = 3023,
-  rt90_5_0_gon_o = 3024
+  static rt90_0_0_gon_v = new CrsProjection(3022);
+  static rt90_2_5_gon_o = new CrsProjection(3023);
+  static rt90_5_0_gon_o = new CrsProjection(3024);
+
+  // ------------------------------------------------------
+  // TODO: Add methods here i.e. those methods which were extension methods for the Dart enum,
+  // but now with TypeScript they can be methods since the type has now been implemented as a class above
+  // e.g. these methods:
+    // bool isWgs84()
+    // bool isSweref()
+    // bool isRT90()
 }
