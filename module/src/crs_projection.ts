@@ -141,30 +141,43 @@ export default class CrsProjection {
   }
 
   /// Returning an array with all supported projections.
+  /// The order is: The very first item is the projection WGS84, 
+  /// and after that they are increased by EPSG number,
+  /// i.e. the first (after wgs84) is sweref_99_tm (EPSG 3006) 
+  /// and the last is rt90_5_0_gon_o (EPSG 3024) 
   static getAllCrsProjections(): Array<CrsProjection> {
     return [
       CrsProjection.wgs84,            
 
-      CrsProjection.sweref_99_tm,
+      CrsProjection.sweref_99_tm, // national sweref99 CRS
+
+      // local sweref99 systems (the new swedish national system):
       CrsProjection.sweref_99_12_00,
       CrsProjection.sweref_99_13_30,
-      CrsProjection.sweref_99_14_15,
       CrsProjection.sweref_99_15_00,
-      CrsProjection.sweref_99_15_45,
       CrsProjection.sweref_99_16_30,
-      CrsProjection.sweref_99_17_15,
       CrsProjection.sweref_99_18_00,
+      CrsProjection.sweref_99_14_15,
+      CrsProjection.sweref_99_15_45,
+      CrsProjection.sweref_99_17_15,
       CrsProjection.sweref_99_18_45,
       CrsProjection.sweref_99_20_15,
       CrsProjection.sweref_99_21_45,
       CrsProjection.sweref_99_23_15,
-      
+    
+    
+      // local RT90 systems (the old swedish national system):
+      CrsProjection.rt90_7_5_gon_v,
+      CrsProjection.rt90_5_0_gon_v,
+    
+      /// https://epsg.org/crs_3021/RT90-2-5-gon-V.html
+      /// https://epsg.io/3021
+      /// https://spatialreference.org/ref/epsg/3021/
+      CrsProjection.rt90_2_5_gon_v,
+    
       CrsProjection.rt90_0_0_gon_v,
       CrsProjection.rt90_2_5_gon_o,
-      CrsProjection.rt90_2_5_gon_v,
-      CrsProjection.rt90_5_0_gon_o,
-      CrsProjection.rt90_5_0_gon_v,
-      CrsProjection.rt90_7_5_gon_v,
+      CrsProjection.rt90_5_0_gon_o
     ];
   }
 }
