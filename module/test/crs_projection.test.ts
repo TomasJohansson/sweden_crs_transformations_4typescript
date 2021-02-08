@@ -12,6 +12,7 @@ const totalNumberOfProjections = numberOfSweref99projections + numberOfRT90proje
 let _wgs84Projections: Array<CrsProjection>;
 let _sweref99Projections: Array<CrsProjection>;
 let _rt90Projections: Array<CrsProjection>;
+let _allCrsProjections: Array<CrsProjection>;
 
 beforeEach(() => {
   _wgs84Projections = [CrsProjection.wgs84];
@@ -32,6 +33,9 @@ beforeEach(() => {
     CrsProjection.rt90_5_0_gon_o, CrsProjection.rt90_5_0_gon_v, CrsProjection.rt90_7_5_gon_v
   ]);
   _rt90Projections = Array.from(rt90Projections);
+
+
+  _allCrsProjections = CrsProjection.getAllCrsProjections();
 });
 
 test('getEpsgNumber', () => {
@@ -126,3 +130,47 @@ test('getAsString', () => {
     CrsProjection.rt90_0_0_gon_v.getAsString()
   );
 }); 
+
+
+test('getCrsProjectionByEpsgNumber', () => {
+  Assert.AreEqual(
+    CrsProjection.sweref_99_tm,
+    CrsProjection.getCrsProjectionByEpsgNumber(epsgNumberForSweref99tm)
+  );
+
+  Assert.AreEqual(
+    CrsProjection.sweref_99_23_15,
+    CrsProjection.getCrsProjectionByEpsgNumber(3018) // https://epsg.io/3018
+  );
+
+  Assert.AreEqual(
+    CrsProjection.rt90_5_0_gon_o,
+    CrsProjection.getCrsProjectionByEpsgNumber(3024)  // https://epsg.io/3024
+  );
+});
+
+test('verifyTotalNumberOfProjections', () => {
+  Assert.AreEqual(
+    totalNumberOfProjections,
+    _allCrsProjections.length // retrieved with 'GetAllCrsProjections' in the SetUp method
+  );
+});
+
+test('verifyNumberOfWgs84Projections', () => {
+  Assert.AreEqual(numberOfWgs84Projections, _allCrsProjections.filter((crs) => crs.isWgs84()).length);
+});
+
+test('verifyNumberOfSweref99Projections', () => {
+  Assert.AreEqual(numberOfSweref99projections, _allCrsProjections.filter((crs) => crs.isSweref()).length);
+});
+
+test('verifyNumberOfRT90Projections', () => {
+  Assert.AreEqual(numberOfRT90projections, _allCrsProjections.filter((crs) => crs.isRT90()).length);
+});
+
+test('verifyThatAllProjectionsCanBeRetrievedByItsEpsgNumber', () => {
+  for(var crsProjection of _allCrsProjections) {
+    var crsProj = CrsProjection.getCrsProjectionByEpsgNumber(crsProjection.getEpsgNumber());
+    Assert.AreEqual(crsProjection, crsProj);
+  }
+});

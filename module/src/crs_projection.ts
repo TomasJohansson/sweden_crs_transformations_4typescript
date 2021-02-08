@@ -110,7 +110,7 @@ export class CrsProjection {
     }
     for(let i=0; i<allValues.length; i++) {
       const theValue = allValues[i] as CrsProjection;
-      if(this.getEpsgNumber() === theValue.getEpsgNumber()) {
+      if(theValue != null && theValue.getEpsgNumber  && this.getEpsgNumber() === theValue.getEpsgNumber()) {
         return allKeys[i].toUpperCase();    
       }      
     }
@@ -127,4 +127,49 @@ export class CrsProjection {
 
   // the swedish projections start at index 1 (in the enum _CrsProjection) with EPSG number 3006 (i.e. the difference is 3006-1)
   private static readonly _differenceBetweenEnumIndexAndEspgNumber = 3005;
+
+
+  /// Factory method creating an enum 'CrsProjection' by its number (EPSG) value.
+  /// [epsg] is an EPSG number.
+  /// https://en.wikipedia.org/wiki/EPSG_Geodetic_Parameter_Dataset
+  /// https://epsg.org
+  /// https://epsg.io
+  /// See also [CrsProjection]
+  static getCrsProjectionByEpsgNumber(epsg: number): CrsProjection {
+    const values: Array<CrsProjection> = CrsProjection.getAllCrsProjections();
+    for(const crsProjection of values) {
+      if(crsProjection.getEpsgNumber() === epsg) {
+        return crsProjection;
+      }
+    }
+    throw new Error(`Could not find CrsProjection for EPSG ${epsg}`);
+  }
+
+  /// Returning an array with all supported projections.
+  static getAllCrsProjections(): Array<CrsProjection> {
+    return [
+      CrsProjection.wgs84,            
+
+      CrsProjection.sweref_99_tm,
+      CrsProjection.sweref_99_12_00,
+      CrsProjection.sweref_99_13_30,
+      CrsProjection.sweref_99_14_15,
+      CrsProjection.sweref_99_15_00,
+      CrsProjection.sweref_99_15_45,
+      CrsProjection.sweref_99_16_30,
+      CrsProjection.sweref_99_17_15,
+      CrsProjection.sweref_99_18_00,
+      CrsProjection.sweref_99_18_45,
+      CrsProjection.sweref_99_20_15,
+      CrsProjection.sweref_99_21_45,
+      CrsProjection.sweref_99_23_15,
+      
+      CrsProjection.rt90_0_0_gon_v,
+      CrsProjection.rt90_2_5_gon_o,
+      CrsProjection.rt90_2_5_gon_v,
+      CrsProjection.rt90_5_0_gon_o,
+      CrsProjection.rt90_5_0_gon_v,
+      CrsProjection.rt90_7_5_gon_v,
+    ];
+  }
 }
