@@ -4,6 +4,8 @@
   "description": "TODO",
   "main": "index.js",
   "scripts": {
+    "dev":  "webpack --mode development",
+    "prod": "webpack --mode production",
     "test": "jest"
   },
   "repository": {
