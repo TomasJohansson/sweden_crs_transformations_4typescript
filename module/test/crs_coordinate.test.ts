@@ -2,9 +2,6 @@
 import { CrsProjection } from '../src/crs_projection';
 import Assert from './dot_net_helpers';
 
-type int = number;
-type double = number;
-
 const epsgNumberForSweref99tm = 3006; // https://epsg.org/crs_3006/SWEREF99-TM.html
 
 // https://kartor.eniro.se/m/XRCfh
@@ -99,6 +96,7 @@ test('createCoordinate', () => {
 test('equalityTest', () => {
   const coordinateInstance_1 = CrsCoordinate.createCoordinate(CrsProjection.wgs84, stockholmCentralStation_WGS84_latitude, stockholmCentralStation_WGS84_longitude);
   const coordinateInstance_2 = CrsCoordinate.createCoordinate(CrsProjection.wgs84, stockholmCentralStation_WGS84_latitude, stockholmCentralStation_WGS84_longitude);
+  Assert.AreEqual(coordinateInstance_1, coordinateInstance_2);
   // From the Dart library:
   // Assert.AreEqual(coordinateInstance_1.hashCode, coordinateInstance_2.hashCode); // Dart
   // Assert.AreEqual(coordinateInstance_1, coordinateInstance_2);
@@ -135,6 +133,7 @@ test('equalityTest', () => {
     stockholmCentralStation_WGS84_latitude + delta,      
     stockholmCentralStation_WGS84_longitude + delta
   );
+  expect(coordinateInstance_1).not.toEqual(coordinateInstance_4); // TODO remove the Assert class ... and use jest ('expect...') directly everywhere
   // Note that below are the Are*NOT*Equal assertions made instead of AreEqual as further above when a smaller delta value was used
   // From the Dart library:
   // Assert.IsTrue(coordinateInstance_1 != coordinateInstance_4); // Note that the method "operator !=" becomes used here
@@ -177,7 +176,7 @@ test('toStringTest', () => {
 
 function _AssertEqual(crsCoordinate_1: CrsCoordinate, crsCoordinate_2: CrsCoordinate): void  {
   Assert.AreEqual(crsCoordinate_1.crsProjection, crsCoordinate_2.crsProjection);
-  const maxDifference: double = crsCoordinate_1.crsProjection.isWgs84() ? 0.000007 : 0.5; // the other (i.e. non-WGS84) value is using meter as unit, so 0.5 is just five decimeters difference
+  const maxDifference = crsCoordinate_1.crsProjection.isWgs84() ? 0.000007 : 0.5; // the other (i.e. non-WGS84) value is using meter as unit, so 0.5 is just five decimeters difference
   const diffLongitude = Math.abs((crsCoordinate_1.xLongitude - crsCoordinate_2.xLongitude));
   const diffLatitude = Math.abs((crsCoordinate_1.yLatitude - crsCoordinate_2.yLatitude));
   

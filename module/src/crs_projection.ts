@@ -110,24 +110,19 @@ export class CrsProjection {
     }
     for(let i=0; i<allValues.length; i++) {
       const theValue = allValues[i] as CrsProjection;
-      if(theValue != null && theValue.getEpsgNumber  && this.getEpsgNumber() === theValue.getEpsgNumber()) {
-        return allKeys[i].toUpperCase();    
+      const theKey = allKeys[i] as string;
+      if(theKey != null && theValue != null && theValue.getEpsgNumber && this.getEpsgNumber() === theValue.getEpsgNumber()) {
+        return theKey.toUpperCase();           
       }      
     }
     throw Error(`Could not render the CrsProjection as a string. The EPSG number for the failed projection: ${this.getEpsgNumber()}`);
   }  
-
-  private static readonly _epsgForWgs84 = 4326;
 
   private static readonly _epsgLowerValueForSweref = 3006; // Sweref99tm
   private static readonly _epsgUpperValueForSweref = 3018;
 
   private static readonly _epsgLowerValueForRT90 = 3019;
   private static readonly _epsgUpperValueForRT90 = 3024;
-
-  // the swedish projections start at index 1 (in the enum _CrsProjection) with EPSG number 3006 (i.e. the difference is 3006-1)
-  private static readonly _differenceBetweenEnumIndexAndEspgNumber = 3005;
-
 
   /// Factory method creating an enum 'CrsProjection' by its number (EPSG) value.
   /// [epsg] is an EPSG number.

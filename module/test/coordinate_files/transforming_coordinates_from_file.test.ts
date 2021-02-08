@@ -50,8 +50,19 @@ test('assertThatTransformationsDoNotDifferTooMuchFromExpectedResultInFile', () =
     const coordinates: Array<CrsCoordinate> = listOfCoordinatesWhichRepresentTheSameLocation.coordinateList;
     for(let i=0; i<coordinates.length-1; i++) {
       for(let j=i+1; j<coordinates.length; j++) {
-        _transform(coordinates[i], coordinates[j], problemTransformationResults);
-        _transform(coordinates[j], coordinates[i], problemTransformationResults);
+        // if(coordinates[i] != null && coordinates[j] != null) {
+        //   _transform(coordinates[i], coordinates[j], problemTransformationResults);
+        //   _transform(coordinates[j], coordinates[i], problemTransformationResults);        
+        // }
+        // Note that the above does NOT compile when using (in tsconfig.json) "noUncheckedIndexedAccess": true
+        //    error TS2345: Argument of type 'CrsCoordinate | undefined' is not assignable to parameter of type 'CrsCoordinate'.
+        // Therefore doing as below instead, which does compile with noUncheckedIndexedAccess
+        const c1 = coordinates[i];
+        const c2 = coordinates[j];
+        if( c1 != null && c2 != null ) {
+          _transform(c1, c2, problemTransformationResults);
+          _transform(c2, c1, problemTransformationResults);
+        }
         numberOfTransformations += 2;
       }
     }
@@ -114,6 +125,15 @@ class _Coordinates {
     lineFromFile: string
   ): _Coordinates {
     const columns: Array<string> = lineFromFile.split(columnSeparator);
+    if(!(
+        columns[0] && columns[1] && columns[2] && columns[3] && columns[4] && 
+        columns[5] && columns[6] && columns[7] && columns[8] && columns[9]
+      )
+    ) {
+      throw new Error("Column data not available");
+    }
+    // Without the above if statement (and error thrown) there will be compiling error below when using the following configuration in tsconfig.json
+      // "noUncheckedIndexedAccess": true,
     return new _Coordinates([
       // Note that the order of the parameters in the input file (with its lines being used here)
       // are in the order x/Longitude first, but the create method below takes the y/Latitude first

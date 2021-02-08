@@ -301,11 +301,11 @@ export default class GaussKreuger
   /// Conversion from grid coordinates to geodetic coordinates.
   grid_to_geodetic(yLatitude: double, xLongitude: double): LatLon // public double[] grid_to_geodetic(double yLatitude, double xLongitude)
   {
-    const lat_lon: Array<double> = [0.0, 0.0];
     if (this._central_meridian == Number.MIN_VALUE)
     {
-      return new LatLon(lat_lon[1], lat_lon[0]);
+      return new LatLon(0.0, 0.0);
     }
+    const lat_lon: Array<double> = [0.0, 0.0];    
     // Prepare ellipsoid-based stuff.
     const e2 = this._flattening * (2.0 - this._flattening);
     const n = this._flattening / (2.0 - this._flattening);
