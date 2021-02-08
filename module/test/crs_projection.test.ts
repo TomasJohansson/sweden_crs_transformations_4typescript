@@ -1,5 +1,4 @@
 ﻿import { CrsProjection } from '../src/crs_projection';
-import Assert from './dot_net_helpers';
 
 const epsgNumberForWgs84 = 4326;
 const epsgNumberForSweref99tm = 3006; // https://epsg.org/crs_3006/SWEREF99-TM.html
@@ -39,138 +38,149 @@ beforeEach(() => {
 });
 
 test('getEpsgNumber', () => {
-  Assert.AreEqual(
-    epsgNumberForWgs84,
+  expect(
     CrsProjection.wgs84.getEpsgNumber()
+  ).toEqual(
+    epsgNumberForWgs84
   );
 
-  Assert.AreEqual(
-    epsgNumberForSweref99tm,
+  expect(
     CrsProjection.sweref_99_tm.getEpsgNumber()
+  ).toEqual(
+    epsgNumberForSweref99tm
   );
 
-  Assert.AreEqual(
-    epsgNumberForRT90_5_0_gon_o,
+  expect(
     CrsProjection.rt90_5_0_gon_o.getEpsgNumber()
+  ).toEqual(
+    epsgNumberForRT90_5_0_gon_o  
   );
 });
 
 test('isWgs84', () => {
-  Assert.IsTrue(CrsProjection.wgs84.isWgs84());
-  Assert.IsFalse(CrsProjection.sweref_99_tm.isWgs84());
-  Assert.IsFalse(CrsProjection.rt90_0_0_gon_v.isWgs84());
+  expect(CrsProjection.wgs84.isWgs84()).toEqual(true);
+  expect(CrsProjection.sweref_99_tm.isWgs84()).toEqual(false);
+  expect(CrsProjection.rt90_0_0_gon_v.isWgs84()).toEqual(false);
 
-  Assert.AreEqual(numberOfWgs84Projections, _wgs84Projections.length);
+  expect(_wgs84Projections.length).toEqual(numberOfWgs84Projections);
 
   for(var crsProjection of _wgs84Projections) {
-    Assert.IsTrue(crsProjection.isWgs84());
+    expect(crsProjection.isWgs84()).toEqual(true);
   }
   for(var crsProjection of _sweref99Projections) {
-    Assert.IsFalse(crsProjection.isWgs84());
+    expect(crsProjection.isWgs84()).toEqual(false);
   }
   for(var crsProjection of _rt90Projections) {
-    Assert.IsFalse(crsProjection.isWgs84());
+    expect(crsProjection.isWgs84()).toEqual(false);
   }
 });
 
 test('isSweref', () => {
-  Assert.IsFalse(CrsProjection.wgs84.isSweref());
-  Assert.IsTrue(CrsProjection.sweref_99_tm.isSweref());
-  Assert.IsFalse(CrsProjection.rt90_0_0_gon_v.isSweref());    
+  expect(CrsProjection.wgs84.isSweref()).toEqual(false);
+  expect(CrsProjection.sweref_99_tm.isSweref()).toEqual(true);
+  expect(CrsProjection.rt90_0_0_gon_v.isSweref()).toEqual(false);
 
-  Assert.AreEqual(numberOfSweref99projections, _sweref99Projections.length);
+  expect(_sweref99Projections.length).toEqual(numberOfSweref99projections);
 
   for(var crsProjection of _wgs84Projections) {
-    Assert.IsFalse(crsProjection.isSweref());
+    expect(crsProjection.isSweref()).toEqual(false);
   }
   for(var crsProjection of _sweref99Projections) {
-    Assert.IsTrue(crsProjection.isSweref());
+    expect(crsProjection.isSweref()).toEqual(true);
   }
   for(var crsProjection of _rt90Projections) {
-    Assert.IsFalse(crsProjection.isSweref());
+    expect(crsProjection.isSweref()).toEqual(false);
   }    
 });
 
 test('isRT90', () => {
-  Assert.IsFalse(CrsProjection.wgs84.isRT90());
-  Assert.IsFalse(CrsProjection.sweref_99_tm.isRT90());
-  Assert.IsTrue(CrsProjection.rt90_0_0_gon_v.isRT90());
+  expect(CrsProjection.wgs84.isRT90()).toEqual(false);
+  expect(CrsProjection.sweref_99_tm.isRT90()).toEqual(false);
+  expect(CrsProjection.rt90_0_0_gon_v.isRT90()).toEqual(true);
 
-  Assert.AreEqual(numberOfRT90projections, _rt90Projections.length);
+  expect(_rt90Projections.length).toEqual(numberOfRT90projections);
 
   for(var crsProjection of _wgs84Projections) {
-    Assert.IsFalse(crsProjection.isRT90());
+    expect(crsProjection.isRT90()).toEqual(false);
   }
   for(var crsProjection of _sweref99Projections) {
-    Assert.IsFalse(crsProjection.isRT90());
+    expect(crsProjection.isRT90()).toEqual(false);
   }
   for(var crsProjection of _rt90Projections) {
-    Assert.IsTrue(crsProjection.isRT90());
+    expect(crsProjection.isRT90()).toEqual(true);
   }
 });    
 
 test('getAsString', () => {
-  Assert.AreEqual(
-    "WGS84",
+  expect(
     CrsProjection.wgs84.getAsString()
+  ).toEqual(
+    "WGS84"
   );
 
-  Assert.AreEqual(
-    "SWEREF_99_TM",
+  expect(
     CrsProjection.sweref_99_tm.getAsString()
+  ).toEqual(
+    "SWEREF_99_TM"
   );
 
-  Assert.AreEqual(
-    "SWEREF_99_14_15",
+  expect(
     CrsProjection.sweref_99_14_15.getAsString()
+  ).toEqual(
+    "SWEREF_99_14_15"
   );
 
-  Assert.AreEqual(
-    "RT90_0_0_GON_V",
+  expect(
     CrsProjection.rt90_0_0_gon_v.getAsString()
+  ).toEqual(
+    "RT90_0_0_GON_V"
   );
 }); 
 
 
 test('getCrsProjectionByEpsgNumber', () => {
-  Assert.AreEqual(
-    CrsProjection.sweref_99_tm,
+  expect(
     CrsProjection.getCrsProjectionByEpsgNumber(epsgNumberForSweref99tm)
+  ).toEqual(
+    CrsProjection.sweref_99_tm
   );
 
-  Assert.AreEqual(
-    CrsProjection.sweref_99_23_15,
+  expect(
     CrsProjection.getCrsProjectionByEpsgNumber(3018) // https://epsg.io/3018
+  ).toEqual(
+    CrsProjection.sweref_99_23_15
   );
 
-  Assert.AreEqual(
-    CrsProjection.rt90_5_0_gon_o,
+  expect(
     CrsProjection.getCrsProjectionByEpsgNumber(3024)  // https://epsg.io/3024
+  ).toEqual(
+    CrsProjection.rt90_5_0_gon_o
   );
 });
 
 test('verifyTotalNumberOfProjections', () => {
-  Assert.AreEqual(
-    totalNumberOfProjections,
+  expect(
     _allCrsProjections.length // retrieved with 'GetAllCrsProjections' in the SetUp method
+  ).toEqual(
+    totalNumberOfProjections
   );
 });
 
 test('verifyNumberOfWgs84Projections', () => {
-  Assert.AreEqual(numberOfWgs84Projections, _allCrsProjections.filter((crs) => crs.isWgs84()).length);
+  expect(_allCrsProjections.filter((crs) => crs.isWgs84()).length).toEqual(numberOfWgs84Projections);
 });
 
 test('verifyNumberOfSweref99Projections', () => {
-  Assert.AreEqual(numberOfSweref99projections, _allCrsProjections.filter((crs) => crs.isSweref()).length);
+  expect(_allCrsProjections.filter((crs) => crs.isSweref()).length).toEqual(numberOfSweref99projections);
 });
 
 test('verifyNumberOfRT90Projections', () => {
-  Assert.AreEqual(numberOfRT90projections, _allCrsProjections.filter((crs) => crs.isRT90()).length);
+  expect(_allCrsProjections.filter((crs) => crs.isRT90()).length).toEqual(numberOfRT90projections);
 });
 
 test('verifyThatAllProjectionsCanBeRetrievedByItsEpsgNumber', () => {
   for(var crsProjection of _allCrsProjections) {
     var crsProj = CrsProjection.getCrsProjectionByEpsgNumber(crsProjection.getEpsgNumber());
-    Assert.AreEqual(crsProjection, crsProj);
+    expect(crsProjection).toEqual(crsProj);
   }
 });

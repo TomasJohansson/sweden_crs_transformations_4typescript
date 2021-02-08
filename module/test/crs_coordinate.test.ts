@@ -1,6 +1,5 @@
 ﻿import CrsCoordinate from '../src/crs_coordinate';
 import { CrsProjection } from '../src/crs_projection';
-import Assert from './dot_net_helpers';
 
 const epsgNumberForSweref99tm = 3006; // https://epsg.org/crs_3006/SWEREF99-TM.html
 
@@ -78,25 +77,25 @@ test('createCoordinateByEpsgNumber', () => {
   const x = 20.0;
   const y = 60.0;
   const crsCoordinate = CrsCoordinate.createCoordinateByEpsgNumber(epsgNumberForSweref99tm, y, x);
-  Assert.AreEqual(epsgNumberForSweref99tm, crsCoordinate.crsProjection.getEpsgNumber());
-  Assert.AreEqual(x, crsCoordinate.xLongitude);
-  Assert.AreEqual(y, crsCoordinate.yLatitude);
+  expect(crsCoordinate.crsProjection.getEpsgNumber()).toEqual(epsgNumberForSweref99tm);
+  expect(crsCoordinate.xLongitude).toEqual(x);
+  expect(crsCoordinate.yLatitude).toEqual(y);
 });
 
 test('createCoordinate', () => {
   const x = 22.5;
   const y = 62.5;
   const crsCoordinate = CrsCoordinate.createCoordinate(CrsProjection.sweref_99_tm, y, x);
-  Assert.AreEqual(epsgNumberForSweref99tm, crsCoordinate.crsProjection.getEpsgNumber());
-  Assert.AreEqual(CrsProjection.sweref_99_tm, crsCoordinate.crsProjection);
-  Assert.AreEqual(x, crsCoordinate.xLongitude);
-  Assert.AreEqual(y, crsCoordinate.yLatitude);
+  expect(crsCoordinate.crsProjection.getEpsgNumber()).toEqual(epsgNumberForSweref99tm);
+  expect(crsCoordinate.crsProjection).toEqual(CrsProjection.sweref_99_tm);
+  expect(crsCoordinate.xLongitude).toEqual(x);
+  expect(crsCoordinate.yLatitude).toEqual(y);
 });
 
 test('equalityTest', () => {
   const coordinateInstance_1 = CrsCoordinate.createCoordinate(CrsProjection.wgs84, stockholmCentralStation_WGS84_latitude, stockholmCentralStation_WGS84_longitude);
   const coordinateInstance_2 = CrsCoordinate.createCoordinate(CrsProjection.wgs84, stockholmCentralStation_WGS84_latitude, stockholmCentralStation_WGS84_longitude);
-  Assert.AreEqual(coordinateInstance_1, coordinateInstance_2);
+  expect(coordinateInstance_1).toEqual(coordinateInstance_2);
   // From the Dart library:
   // Assert.AreEqual(coordinateInstance_1.hashCode, coordinateInstance_2.hashCode); // Dart
   // Assert.AreEqual(coordinateInstance_1, coordinateInstance_2);
@@ -113,7 +112,7 @@ test('equalityTest', () => {
 
   );
   // Assert.AreEqual(coordinateInstance_1.hashCode, coordinateInstance_3.hashCode); // Dart
-  Assert.AreEqual(coordinateInstance_1, coordinateInstance_3);
+  expect(coordinateInstance_1).toEqual(coordinateInstance_3);
   // From the Dart library:
   // Assert.IsTrue(coordinateInstance_1 == coordinateInstance_3); // method "operator =="  // Dart
   // Assert.IsTrue(coordinateInstance_3 == coordinateInstance_1);
@@ -133,7 +132,7 @@ test('equalityTest', () => {
     stockholmCentralStation_WGS84_latitude + delta,      
     stockholmCentralStation_WGS84_longitude + delta
   );
-  expect(coordinateInstance_1).not.toEqual(coordinateInstance_4); // TODO remove the Assert class ... and use jest ('expect...') directly everywhere
+  expect(coordinateInstance_1).not.toEqual(coordinateInstance_4);
   // Note that below are the Are*NOT*Equal assertions made instead of AreEqual as further above when a smaller delta value was used
   // From the Dart library:
   // Assert.IsTrue(coordinateInstance_1 != coordinateInstance_4); // Note that the method "operator !=" becomes used here
@@ -145,43 +144,47 @@ test('equalityTest', () => {
 
 test('toStringTest', () => {
   const coordinate = CrsCoordinate.createCoordinate(CrsProjection.sweref_99_18_00, 6579457.649, 153369.673);
-  Assert.AreEqual(
-    "CrsCoordinate [ Y: 6579457.649 , X: 153369.673 , CRS: SWEREF_99_18_00 ]",
+  expect(
     coordinate.toString()
+  ).toEqual(
+    "CrsCoordinate [ Y: 6579457.649 , X: 153369.673 , CRS: SWEREF_99_18_00 ]"    
   );
 
   
 
   const coordinate2 = CrsCoordinate.createCoordinate(CrsProjection.wgs84, 59.330231, 18.059196);
   const expectedDefaultToStringResultForCoordinate2 = "CrsCoordinate [ Latitude: 59.330231 , Longitude: 18.059196 , CRS: WGS84 ]";
-  Assert.AreEqual(
-      expectedDefaultToStringResultForCoordinate2,
-      coordinate2.toString()
+  expect(
+    coordinate2.toString()
+  ).toEqual(
+    expectedDefaultToStringResultForCoordinate2      
   );
 
   // now below testing the same coordinate as above but with a custom 'ToString' implementation
   CrsCoordinate.setToStringImplementation(_myCustomToStringFunction);
-  Assert.AreEqual(
-    "18.059196 , 59.330231",
+  expect(
     coordinate2.toString()
+  ).toEqual(
+    "18.059196 , 59.330231"
   );
   
   CrsCoordinate.setToStringImplementationDefault(); // restores the default 'ToString' implementation
-  Assert.AreEqual(
-      expectedDefaultToStringResultForCoordinate2,
-      coordinate2.toString()
+  expect(
+    coordinate2.toString()
+  ).toEqual(
+    expectedDefaultToStringResultForCoordinate2
   );    
 });
 
 
 function _AssertEqual(crsCoordinate_1: CrsCoordinate, crsCoordinate_2: CrsCoordinate): void  {
-  Assert.AreEqual(crsCoordinate_1.crsProjection, crsCoordinate_2.crsProjection);
+  expect(crsCoordinate_1.crsProjection).toEqual(crsCoordinate_2.crsProjection);
   const maxDifference = crsCoordinate_1.crsProjection.isWgs84() ? 0.000007 : 0.5; // the other (i.e. non-WGS84) value is using meter as unit, so 0.5 is just five decimeters difference
   const diffLongitude = Math.abs((crsCoordinate_1.xLongitude - crsCoordinate_2.xLongitude));
   const diffLatitude = Math.abs((crsCoordinate_1.yLatitude - crsCoordinate_2.yLatitude));
   
-  Assert.IsTrue(diffLongitude < maxDifference);
-  Assert.IsTrue(diffLatitude < maxDifference);
+  expect(diffLongitude < maxDifference).toEqual(true);
+  expect(diffLatitude < maxDifference).toEqual(true);
 }
 
 function _myCustomToStringFunction(coordinate: CrsCoordinate): string {

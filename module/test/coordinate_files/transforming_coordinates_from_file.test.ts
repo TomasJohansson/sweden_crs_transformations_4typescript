@@ -1,5 +1,4 @@
 ﻿// dart test/coordinate_files/transforming_coordinates_from_file_test.dart
-import Assert from '../dot_net_helpers';
 import CrsCoordinate from "../../src/crs_coordinate";
 import { CrsProjection } from "../../src/crs_projection";
 import fs from 'fs';
@@ -72,7 +71,7 @@ test('assertThatTransformationsDoNotDifferTooMuchFromExpectedResultInFile', () =
       console.log(s);
     }
   }
-  Assert.AreEqual(0, problemTransformationResults.length);
+  expect(problemTransformationResults.length).toEqual(0);
 
   const expectedNumberOfTransformations = 108; // for an explanation, see the lines below:
   // Each line in the input file "swedish_crs_coordinates.csv" has three coordinates (and let's below call then A B C)
@@ -83,7 +82,7 @@ test('assertThatTransformationsDoNotDifferTooMuchFromExpectedResultInFile', () =
   // (and three more in the opposite directions)
   // And there are 18 local CRS for sweden (i.e number of data rows in the file)
   // Thus the total number of transformations should be 18 * 6 = 108
-  Assert.AreEqual(expectedNumberOfTransformations, numberOfTransformations);
+  expect(numberOfTransformations).toEqual(expectedNumberOfTransformations);
 });
 
 
