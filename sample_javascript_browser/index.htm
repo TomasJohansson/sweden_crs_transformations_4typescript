@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./node_modules/sweden_crs_transformations_typescript/dist/swed_crs_transform_bundle.js"></script>
+
+    <script>
+        var swe = sweden_crs_transformations;
+        document.write("EPSG number for CrsProjection WGS84: " + swe.CrsProjection.wgs84.getEpsgNumber());
+        document.write("<br>EPSG number for CrsProjection SWEREF99 TM: " + swe.CrsProjection.sweref_99_tm.getEpsgNumber());
+        var stockholmCentralStation_WGS84_latitude = 59.330231;
+        var stockholmCentralStation_WGS84_longitude = 18.059196;
+        var coordinateWGS84 = swe.CrsCoordinate.createCoordinate(
+            swe.CrsProjection.wgs84,
+            stockholmCentralStation_WGS84_latitude,      
+            stockholmCentralStation_WGS84_longitude
+        );
+        var coordinateSweref99tm = coordinateWGS84.transform(swe.CrsProjection.sweref_99_tm);
+        document.write("<br>coordinateSweref99tm X / Y : " + coordinateSweref99tm.xLongitude + " , " + coordinateSweref99tm.yLatitude);
+    </script>
+</body>
+</html>
