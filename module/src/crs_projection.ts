@@ -100,20 +100,13 @@ export default class CrsProjection {
   /// A string representation of an enum instance.
   /// The string returned is the same as the name but uppercased, e.g. wgs84 ==> "WGS84"
   getAsString(): string {
-    // Are the below 'Object.keys' and the 'Object.values' guaranteed to be returned in the same order?
-    // This is assumed further down !
-    let allKeys: string[] = Object.keys(CrsProjection);   
-    let allValues: any[] = Object.values(CrsProjection);
-    // TODO this should be implemented in a better way
-    if(allValues.length != allKeys.length) {
-      throw new Error("not equal length of keys and values in CrsProjection");
-    }
-    for(let i=0; i<allValues.length; i++) {
-      const theValue = allValues[i] as CrsProjection;
-      const theKey = allKeys[i] as string;
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
+    // ECMAScript 2017 includes Object.entries
+    // https://en.wikipedia.org/wiki/ECMAScript#8th_Edition_%E2%80%93_ECMAScript_2017
+    for (const [theKey, theValue] of Object.entries(CrsProjection)) {
       if(theKey != null && theValue != null && theValue.getEpsgNumber && this.getEpsgNumber() === theValue.getEpsgNumber()) {
-        return theKey.toUpperCase();           
-      }      
+        return theKey.toUpperCase();
+      }
     }
     throw Error(`Could not render the CrsProjection as a string. The EPSG number for the failed projection: ${this.getEpsgNumber()}`);
   }  
