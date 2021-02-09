@@ -184,3 +184,21 @@ test('verifyThatAllProjectionsCanBeRetrievedByItsEpsgNumber', () => {
     expect(crsProjection).toEqual(crsProj);
   }
 });
+
+test('getAllCrsProjections , verify the expected order of the projections', () => {
+  const allProjections = CrsProjection.getAllCrsProjections();
+  expect(allProjections.length).toEqual(totalNumberOfProjections);
+  expect(allProjections[0]).toEqual(CrsProjection.wgs84);
+
+  // only the first (wgs84, with EPSG 4326) above is "special" but the order of the rest (sweref99 and rt90 projections)
+  // is that they should be ordered by EPSG numbers from 3006 to 3024
+  // i.e. EPSG 3006 for the second item (after the above wgs84) and EPSG 3024 for the last item in the array
+  let epsgNumber = 3006;
+  expect(allProjections[1]?.getEpsgNumber()).toEqual(epsgNumber);
+  expect(allProjections[allProjections.length-1]?.getEpsgNumber()).toEqual(3024);
+  for(let i=1; i<allProjections.length; i++) {
+    let proj = allProjections[i];
+    expect(proj?.getEpsgNumber()).toEqual(epsgNumber);
+    epsgNumber++;
+  }
+});
