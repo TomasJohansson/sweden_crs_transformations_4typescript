@@ -4,8 +4,11 @@
   "description": "TODO",
   "main": "index.js",
   "scripts": {
-    "dev":  "webpack --mode development",
-    "prod": "webpack --mode production",
+    "babdev": "babel dist/swed_crs_transform_bundled_with_webpack.js --out-file dist/swed_crs_transform_bundled_with_webpack__babel_es5.js",
+    "babprod": "babel dist/swed_crs_transform_bundled_with_webpack.js --out-file dist/swed_crs_transform_bundled_with_webpack__babel_es5_prod.js --presets minify",
+    "TODO": "try to reduce the above duplication and try to reuse the output filename in webpack.config.js",
+    "dev": "webpack --mode development && npm run babdev",
+    "prod": "webpack --mode production && npm run babprod",
     "test": "jest"
   },
   "repository": {
@@ -18,7 +21,11 @@
   "author": "Tomas Johansson (https://programmerare.com/)",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.12.16",
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
     "@types/jest": "^26.0.20",
+    "babel-preset-minify": "^0.5.1",
     "jest": "^26.6.3",
     "ts-jest": "^26.5.0",
     "ts-loader": "^8.0.16",

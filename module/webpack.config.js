@@ -19,7 +19,7 @@ module.exports = {
   devtool: 'eval-source-map',
   output: {
     publicPath: 'dist',
-    filename: '[name]_bundle.js',
+    filename: '[name]_bundled_with_webpack.js',
     path: path.resolve(__dirname, 'dist'),
     library: 'sweden_crs_transformations'
   },

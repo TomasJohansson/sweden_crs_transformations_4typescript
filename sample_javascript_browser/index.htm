@@ -118,14 +118,23 @@ Luleå Station;65.584141;22.164724;7290667
     </div>
 
 
+    <!-- polyfill "core-js-bundle" below, makes it work in IE 11 too -->
+    <script src="./node_modules/core-js-bundle/index.js"></script>
+
     <!-- defines 'sweden_crs_transformations' used in the script further down -->
-    <script src="./node_modules/sweden_crs_transformations_typescript/dist/swed_crs_transform_bundle.js"></script>
+    <!-- <script src="./node_modules/sweden_crs_transformations_typescript/dist/swed_crs_transform_bundled_with_webpack.js"></script> -->
+    <!-- <script src="./node_modules/sweden_crs_transformations_typescript/dist/swed_crs_transform_bundled_with_webpack__babel_es5.js"></script> -->
+    <script src="./node_modules/sweden_crs_transformations_typescript/dist/swed_crs_transform_bundled_with_webpack__babel_es5_prod.js"></script>
+    
 
     <!-- defines the function 'initializeSelectListsAndButtons' used in the script further down -->
     <script src="./javascript_sample.js"></script>
 
     <script>
-        initializeSelectListsAndButtons(sweden_crs_transformations);
+        window.onload = function load() {
+            initializeSelectListsAndButtons(sweden_crs_transformations);
+        };        
+        
         
         // Below is also some example usage of the above library 'sweden_crs_transformations' (exposed by a node module above)
         // which might be enabled (by removing the comments block) if you want to try using it.
