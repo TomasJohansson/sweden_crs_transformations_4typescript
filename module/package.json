@@ -2,7 +2,8 @@
   "name": "sweden_crs_transformations_typescript",
   "version": "1.0.0",
   "description": "TODO",
-  "main": "index.js",
+  "main": "./srcjs/src/index.js",
+  "types": "./srcjs/src/index.d.ts",
   "scripts": {
     "babdev": "babel dist/swed_crs_transform_bundled_with_webpack.js --out-file dist/swed_crs_transform_bundled_with_webpack__babel_es5.js",
     "babprod": "babel dist/swed_crs_transform_bundled_with_webpack.js --out-file dist/swed_crs_transform_bundled_with_webpack__babel_es5_prod.js --presets minify",

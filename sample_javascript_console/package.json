@@ -1,0 +1,17 @@
+{
+  "name": "sample_javascript_console",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Tomas Johansson",
+  "license": "ISC",
+  "dependencies": {
+    "sweden_crs_transformations_typescript": "link:..\\module"
+  }
+}

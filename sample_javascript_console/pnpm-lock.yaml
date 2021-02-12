@@ -1,0 +1,5 @@
+dependencies:
+  sweden_crs_transformations_typescript: link:../module
+lockfileVersion: 5.2
+specifiers:
+  sweden_crs_transformations_typescript: link:..\module
