@@ -1,5 +1,5 @@
 {
-  "name": "sample_javascript_console",
+  "name": "example_javascript_console",
   "version": "1.0.0",
   "description": "",
   "main": ".src/index.js",
@@ -12,6 +12,6 @@
   "author": "Tomas Johansson",
   "license": "ISC",
   "dependencies": {
-    "sweden_crs_transformations_typescript": "link:..\\module"
+    "sweden_crs_transformations_typescript": "link:..\\sweden_crs_transformations_typescript"
   }
 }

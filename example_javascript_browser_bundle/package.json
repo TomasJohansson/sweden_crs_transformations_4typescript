@@ -1,5 +1,5 @@
 {
-  "name": "sample_javascript_browser",
+  "name": "example_javascript_browser_bundle",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "core-js-bundle": "^3.8.3",
-    "sweden_crs_transformations_typescript": "link:..\\module"
+    "sweden_crs_transformations_typescript": "link:..\\sweden_crs_transformations_typescript"
   }
 }
