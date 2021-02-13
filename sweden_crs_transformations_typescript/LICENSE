@@ -20,9 +20,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ----------------------------------------------------------------------------------------------
-The above license text is for 'sweden_crs_transformations_4dart' which is a library that has been 
-ported from the C# library 'sweden_crs_transformations_4net' which is also licensed with MIT since 
-it started as a fork of the C# library 'MightyLittleGeodesy' which is licensed with the MIT license.
+The above license text is for 'sweden_crs_transformations_4typescript' which is a library that has been 
+ported from the C# library 'sweden_crs_transformations_4net' (and 'sweden_crs_transformations_4dart') which are also licensed with MIT since 
+'sweden_crs_transformations_4net' started as a fork of the C# library 'MightyLittleGeodesy' which is licensed with the MIT license.
 The URL for the original C# repository 'MightyLittleGeodesy': https://github.com/bjornsallarp/MightyLittleGeodesy/
 The three lines below has been copied from the above URL for 'MightyLittleGeodesy':
 > The calculations in this library is based on the excellent javascript library by Arnold Andreasson 

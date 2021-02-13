@@ -1,89 +1,95 @@
-# sweden_crs_transformations_4dart
-'sweden_crs_transformations_4dart' is a Dart library ported from the 
-[C#.NET library 'sweden_crs_transformations_4net'](https://github.com/TomasJohansson/sweden_crs_transformations_4net/) 
+# sweden_crs_transformations_4typescript
+'sweden_crs_transformations_4typescript' is a TypeScript library ported from the 
+[C#.NET library 'sweden_crs_transformations_4net'](https://github.com/TomasJohansson/sweden_crs_transformations_4net/) and the [Dart library 'sweden_crs_transformations_4dart'](https://github.com/TomasJohansson/sweden_crs_transformations_4dart/)
 for transforming geographic coordinates between the following three kind of CRS (Coordinate Reference Systems): WGS84, SWEREF99 and RT90.
 (13 versions of SWEREF99, and 6 versions of RT90)
 
-That C#.NET library ('sweden_crs_transformations_4net') is 
+The C#.NET library ('sweden_crs_transformations_4net') is 
 based on [C# library MightyLittleGeodesy](https://github.com/bjornsallarp/MightyLittleGeodesy/) which in turn is based on a [javascript library by Arnold Andreasson](https://latlong.mellifica.se/).
 
 The main part of 'MightyLittleGeodesy' which has been kept (to the C# library 'sweden_crs_transformations_4net') is the mathematical calculations in the class 'GaussKreuger.cs'.  
-Regarding the port to this 'sweden_crs_transformations_4dart' then of course there had to be more modifications since Dart has differences in syntax compared with C#, although 
+Regarding the port to this 'sweden_crs_transformations_4typescript' then of course there had to be more modifications since TypeScript has differences in syntax compared with C#, although 
 the mathematical logic has still been kept from the original 'MightyLittleGeodesy' class 'GaussKreuger.cs'.
 
-# pub.dev release
+# npm release
 
-[https://pub.dev/packages/sweden_crs_transformations_4dart/install](https://pub.dev/packages/sweden_crs_transformations_4dart/install)
+No. At least not yet. Maybe later.
 
-# Code example
+# Code example using TypeScript (pasted below from 'example_typescript_console\src\index.ts')
 ```dart
-import 'package:sweden_crs_transformations_4dart/sweden_crs_transformations_4dart.dart';
+import {CrsProjection, CrsCoordinate} from 'sweden_crs_transformations_4typescript';
 
-void main() {
-  // The location of Stockholm Central Station, according to Eniro:
-  // https://kartor.eniro.se/m/XRCfh
-      //WGS84 decimal (lat, lon)        59.330231, 18.059196
-      //RT90 (northing, easting)        6580994, 1628294
-      //SWEREF99 TM (northing, easting) 6580822, 674032
-  const stockholmCentralStation_WGS84_latitude = 59.330231;
-  const stockholmCentralStation_WGS84_longitude = 18.059196;
+// The location of Stockholm Central Station, according to Eniro:
+    // https://kartor.eniro.se/m/XRCfh
+    // WGS84 decimal (lat, lon)        59.330231, 18.059196
+    // RT90 (northing, easting)        6580994, 1628294
+    // SWEREF99 TM (northing, easting) 6580822, 674032
+const stockholmCentralStation_WGS84_latitude = 59.330231;
+const stockholmCentralStation_WGS84_longitude = 18.059196;
 
-  final CrsCoordinate stockholmWGS84 = CrsCoordinate.createCoordinate(
+// the below explicit type ': CrsCoordinate' is optional to specify
+const stockholmWGS84: CrsCoordinate = CrsCoordinate.createCoordinate(
     CrsProjection.wgs84,
     stockholmCentralStation_WGS84_latitude,      
     stockholmCentralStation_WGS84_longitude
-  );
+);
 
-  final CrsCoordinate stockholmSweref99tm = stockholmWGS84.transform(CrsProjection.sweref_99_tm);
-  print('stockholmSweref99tm X: ${stockholmSweref99tm.xLongitude}');
-  print('stockholmSweref99tm Y: ${stockholmSweref99tm.yLatitude}');
-  print('stockholmSweref99tm ToString: ${stockholmSweref99tm.toString()}');
-  // Output from the above:
-  // stockholmSweref99tm X: 674032.357
-  // stockholmSweref99tm Y: 6580821.991
-  // stockholmSweref99tm ToString: CrsCoordinate [ Y: 6580821.991 , X: 674032.357 , CRS: SWEREF_99_TM ]
+// the below explicit type ': CrsCoordinate' is optional to specify
+const stockholmSweref99tm: CrsCoordinate = stockholmWGS84.transform(CrsProjection.sweref_99_tm);
+console.log(`stockholmSweref99tm X: ${stockholmSweref99tm.xLongitude}`);
+console.log(`stockholmSweref99tm Y: ${stockholmSweref99tm.yLatitude}`);
+console.log(`stockholmSweref99tm toString: ${stockholmSweref99tm.toString()}`);
+// Output from the above:
+// stockholmSweref99tm X: 674032.357
+// stockholmSweref99tm Y: 6580821.991
+// stockholmSweref99tm toString: CrsCoordinate [ Y: 6580821.991 , X: 674032.357 , CRS: SWEREF_99_TM ]
 
-  final List<CrsProjection> allProjections = CrsProjectionFactory.getAllCrsProjections();
-  for(final crsProjection in allProjections) {
-    print(stockholmWGS84.transform(crsProjection));
-  }
-  // Output from the above loop:
-  // CrsCoordinate [ Latitude: 59.330231 , Longitude: 18.059196 , CRS: WGS84 ]
-  // CrsCoordinate [ Y: 6580821.991 , X: 674032.357 , CRS: SWEREF_99_TM ]
-  // CrsCoordinate [ Y: 6595151.116 , X: 494604.69 , CRS: SWEREF_99_12_00 ]
-  // CrsCoordinate [ Y: 6588340.147 , X: 409396.217 , CRS: SWEREF_99_13_30 ]
-  // CrsCoordinate [ Y: 6583455.373 , X: 324101.998 , CRS: SWEREF_99_15_00 ]
-  // CrsCoordinate [ Y: 6580494.921 , X: 238750.424 , CRS: SWEREF_99_16_30 ]
-  // CrsCoordinate [ Y: 6579457.649 , X: 153369.673 , CRS: SWEREF_99_18_00 ]
-  // CrsCoordinate [ Y: 6585657.12 , X: 366758.045 , CRS: SWEREF_99_14_15 ]
-  // CrsCoordinate [ Y: 6581734.696 , X: 281431.616 , CRS: SWEREF_99_15_45 ]
-  // CrsCoordinate [ Y: 6579735.93 , X: 196061.94 , CRS: SWEREF_99_17_15 ]
-  // CrsCoordinate [ Y: 6579660.051 , X: 110677.129 , CRS: SWEREF_99_18_45 ]
-  // CrsCoordinate [ Y: 6581507.028 , X: 25305.238 , CRS: SWEREF_99_20_15 ]
-  // CrsCoordinate [ Y: 6585277.577 , X: -60025.629 , CRS: SWEREF_99_21_45 ]
-  // CrsCoordinate [ Y: 6590973.148 , X: -145287.219 , CRS: SWEREF_99_23_15 ]
-  // CrsCoordinate [ Y: 6598325.639 , X: 1884004.1 , CRS: RT90_7_5_GON_V ]
-  // CrsCoordinate [ Y: 6587493.237 , X: 1756244.287 , CRS: RT90_5_0_GON_V ]
-  // CrsCoordinate [ Y: 6580994.18 , X: 1628293.886 , CRS: RT90_2_5_GON_V ]
-  // CrsCoordinate [ Y: 6578822.84 , X: 1500248.374 , CRS: RT90_0_0_GON_V ]
-  // CrsCoordinate [ Y: 6580977.349 , X: 1372202.721 , CRS: RT90_2_5_GON_O ]
-  // CrsCoordinate [ Y: 6587459.595 , X: 1244251.702 , CRS: RT90_5_0_GON_O ]
+// the below explicit type ': Array<CrsProjection>' is optional to specify
+const allProjections: Array<CrsProjection> = CrsProjection.getAllCrsProjections();
+for(const crsProjection of allProjections) {
+    console.log(`${stockholmWGS84.transform(crsProjection)}`);
 }
+// Output from the above loop:
+// CrsCoordinate [ Latitude: 59.330231 , Longitude: 18.059196 , CRS: WGS84 ]
+// CrsCoordinate [ Y: 6580821.991 , X: 674032.357 , CRS: SWEREF_99_TM ]
+// CrsCoordinate [ Y: 6595151.116 , X: 494604.69 , CRS: SWEREF_99_12_00 ]
+// CrsCoordinate [ Y: 6588340.147 , X: 409396.217 , CRS: SWEREF_99_13_30 ]
+// CrsCoordinate [ Y: 6583455.373 , X: 324101.998 , CRS: SWEREF_99_15_00 ]
+// CrsCoordinate [ Y: 6580494.921 , X: 238750.424 , CRS: SWEREF_99_16_30 ]
+// CrsCoordinate [ Y: 6579457.649 , X: 153369.673 , CRS: SWEREF_99_18_00 ]
+// CrsCoordinate [ Y: 6585657.12 , X: 366758.045 , CRS: SWEREF_99_14_15 ]
+// CrsCoordinate [ Y: 6581734.696 , X: 281431.616 , CRS: SWEREF_99_15_45 ]
+// CrsCoordinate [ Y: 6579735.93 , X: 196061.94 , CRS: SWEREF_99_17_15 ]
+// CrsCoordinate [ Y: 6579660.051 , X: 110677.129 , CRS: SWEREF_99_18_45 ]
+// CrsCoordinate [ Y: 6581507.028 , X: 25305.238 , CRS: SWEREF_99_20_15 ]
+// CrsCoordinate [ Y: 6585277.577 , X: -60025.629 , CRS: SWEREF_99_21_45 ]
+// CrsCoordinate [ Y: 6590973.148 , X: -145287.219 , CRS: SWEREF_99_23_15 ]
+// CrsCoordinate [ Y: 6598325.639 , X: 1884004.1 , CRS: RT90_7_5_GON_V ]
+// CrsCoordinate [ Y: 6587493.237 , X: 1756244.287 , CRS: RT90_5_0_GON_V ]
+// CrsCoordinate [ Y: 6580994.18 , X: 1628293.886 , CRS: RT90_2_5_GON_V ]
+// CrsCoordinate [ Y: 6578822.84 , X: 1500248.374 , CRS: RT90_0_0_GON_V ]
+// CrsCoordinate [ Y: 6580977.349 , X: 1372202.721 , CRS: RT90_2_5_GON_O ]
+// CrsCoordinate [ Y: 6587459.595 , X: 1244251.702 , CRS: RT90_5_0_GON_O ]
 ```
+
+# Code example using JavaScript
+
+The JavaScript code can be almost exactly the same as the above example with TypeScript, but remove the types.
+See the example 'example_javascript_console\src\index.js'
 
 # Accuracy of the transformations
 
-This Dart library is a port of the [C#.NET library 'sweden_crs_transformations_4net'](https://github.com/TomasJohansson/sweden_crs_transformations_4net/) and therefore it is using the same file "swedish_crs_coordinates.csv" as the C# library, for the regression testing of the Dart implementation.  
-There are 18 rows with coordinates in that file, and it will lead to 108 transformations being done when executing all Dart tests, e.g. with the command 'pub run test'.  
+This TypeScript library is based on a port of the [C#.NET library 'sweden_crs_transformations_4net'](https://github.com/TomasJohansson/sweden_crs_transformations_4net/) and therefore it is using the same file "swedish_crs_coordinates.csv" as the C# library, for the regression testing of this TypeScript implementation.  
+There are 18 rows with coordinates in that file, and it will lead to 108 transformations being done when executing all Dart tests, e.g. with the command 'pnpm run test'.  
 The coordinate values in the file have been created as median values from six different Java implementations of CRS transformations.  
 For more information about the origin of the data file being used, please see the webpage linked above for the C# library 'sweden_crs_transformations_4net'.
 
 # License
 
 MIT.  
-'sweden_crs_transformations_4dart' is ported from the C# library 'sweden_crs_transformations_4net'
+'sweden_crs_transformations_4typescript' is ported from the C# library 'sweden_crs_transformations_4net' (and from 'sweden_crs_transformations_4dart')
 which is also licensed with MIT since it started as a fork of the C# library 'MightyLittleGeodesy' which is licensed with the MIT license. (see below).  
-[License text for 'sweden_crs_transformations_4dart'](https://github.com/TomasJohansson/sweden_crs_transformations_4dart/blob/dart_SwedenCrsTransformations/LICENSE)
+[License text for 'sweden_crs_transformations_4typescript'](https://github.com/TomasJohansson/sweden_crs_transformations_4typescript/blob/typescript_SwedenCrsTransformations/LICENSE)
 
 # License for the original C# repository [MightyLittleGeodesy](https://github.com/bjornsallarp/MightyLittleGeodesy/)
 
