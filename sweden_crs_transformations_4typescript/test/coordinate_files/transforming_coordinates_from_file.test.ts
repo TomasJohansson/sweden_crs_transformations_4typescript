@@ -1,5 +1,4 @@
-﻿// dart test/coordinate_files/transforming_coordinates_from_file_test.dart
-import CrsCoordinate from "../../src/crs_coordinate";
+﻿import CrsCoordinate from "../../src/crs_coordinate";
 import CrsProjection from "../../src/crs_projection";
 import fs from 'fs';
 import path from 'path';
@@ -118,8 +117,6 @@ function _getFileWithSwedishCrsCoordinates(): string {
 class _Coordinates {
   private constructor(readonly coordinateList: Array<CrsCoordinate>) {}
 
-  // https://dart.dev/guides/language/language-tour#constructors
-  //  Another use case for factory constructors is initializing a final variable using logic that can’t be handled in the initializer list.
   static createFromFileLine(
     lineFromFile: string
   ): _Coordinates {

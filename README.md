@@ -16,7 +16,7 @@ the mathematical logic has still been kept from the original 'MightyLittleGeodes
 No. At least not yet. Maybe later.
 
 # Code example using TypeScript (pasted below from 'example_typescript_console\src\index.ts')
-```dart
+```typescript
 import {CrsProjection, CrsCoordinate} from 'sweden_crs_transformations_4typescript';
 
 // The location of Stockholm Central Station, according to Eniro:
@@ -80,7 +80,7 @@ See the example 'example_javascript_console\src\index.js'
 # Accuracy of the transformations
 
 This TypeScript library is based on a port of the [C#.NET library 'sweden_crs_transformations_4net'](https://github.com/TomasJohansson/sweden_crs_transformations_4net/) and therefore it is using the same file "swedish_crs_coordinates.csv" as the C# library, for the regression testing of this TypeScript implementation.  
-There are 18 rows with coordinates in that file, and it will lead to 108 transformations being done when executing all Dart tests, e.g. with the command 'pnpm run test'.  
+There are 18 rows with coordinates in that file, and it will lead to 108 transformations being done when executing all TypeScript tests, e.g. with the command 'pnpm run test'.  
 The coordinate values in the file have been created as median values from six different Java implementations of CRS transformations.  
 For more information about the origin of the data file being used, please see the webpage linked above for the C# library 'sweden_crs_transformations_4net'.
 

@@ -40,7 +40,7 @@
 // Note that *most of* the above changes were copied from the C# project which modified the GaussKreuger class.
 // But later this file has been ported to the programming languages Dart and then also TypeScript.
 // Thus there have been some more modifications, but for those details about what has changed when porting from C# to Dart and TypeScript, please see the git repository with the source code.
-// (also be aware that some further updates may have been made in the Dart project without being mentioned above in the above comments that mostly was copied from the C# library)
+// (also be aware that some further updates may have been made in the TypeScript project without being mentioned above in the above comments that mostly was copied from the C# library)
 
 // ------------------------------------------------------------------------------------------
 // The below comment block is kept from the original source file (see the above github URL)
