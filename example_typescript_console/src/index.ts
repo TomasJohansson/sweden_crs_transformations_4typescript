@@ -1,4 +1,4 @@
-import {CrsProjection, CrsCoordinate} from 'sweden_crs_transformations_typescript';
+import {CrsProjection, CrsCoordinate} from 'sweden_crs_transformations_4typescript';
 
 // The location of Stockholm Central Station, according to Eniro:
     // https://kartor.eniro.se/m/XRCfh

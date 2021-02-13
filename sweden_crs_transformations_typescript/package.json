@@ -1,5 +1,5 @@
 {
-  "name": "sweden_crs_transformations_typescript",
+  "name": "sweden_crs_transformations_4typescript",
   "version": "1.0.0",
   "description": "TODO",
   "main": "./srcjs/src/index.js",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TomasJohansson/sweden_crs_transformations_typescript"
+    "url": "https://github.com/TomasJohansson/sweden_crs_transformations_4typescript"
   },
   "keywords": [
     "crs"

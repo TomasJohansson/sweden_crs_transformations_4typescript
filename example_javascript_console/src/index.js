@@ -1,4 +1,4 @@
-import {CrsProjection, CrsCoordinate} from 'sweden_crs_transformations_typescript';
+import {CrsProjection, CrsCoordinate} from 'sweden_crs_transformations_4typescript';
 
 // The location of Stockholm Central Station, according to Eniro:
     // https://kartor.eniro.se/m/XRCfh
@@ -53,12 +53,12 @@ for(const crsProjection of allProjections) {
 // -----------------------------------------------
 // Below is the initial example code, which also shows how to use import with 'require':
 /*
-import {CrsProjection as CrsProj, CrsCoordinate} from 'sweden_crs_transformations_typescript';
+import {CrsProjection as CrsProj, CrsCoordinate} from 'sweden_crs_transformations_4typescript';
 // The above statement works if package.json includes the line below:
 // "type": "module",
 
 // But without type the above mentioned "type": "module" then the line below works instead:
-// const { CrsProjection: CrsProj, CrsCoordinate } = require('sweden_crs_transformations_typescript');
+// const { CrsProjection: CrsProj, CrsCoordinate } = require('sweden_crs_transformations_4typescript');
 
 //const wgs84: CrsProj = CrsProj.wgs84; // can be activated just to see that it does not work since this is javascript and not typescript
 const wgs84 = CrsProj.wgs84;

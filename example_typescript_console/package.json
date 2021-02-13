@@ -11,7 +11,7 @@
   "author": "Tomas Johansson",
   "license": "ISC",
   "dependencies": {
-    "sweden_crs_transformations_typescript": "link:..\\sweden_crs_transformations_typescript",
+    "sweden_crs_transformations_4typescript": "link:..\\sweden_crs_transformations_4typescript",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.5"
   }
