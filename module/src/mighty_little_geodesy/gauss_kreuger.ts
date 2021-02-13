@@ -1,15 +1,18 @@
 ﻿/*
-// TODO update the below Dart comments for this TypeScript project (ported from Dart/C#)
+* https://github.com/TomasJohansson/sweden_crs_transformations_typescript
 * Copyright (c) Tomas Johansson , http://www.programmerare.com
-* The code in this library is licensed with MIT.
+* The code in this 'sweden_crs_transformations_typescript' library is licensed with MIT.
 * The library is based on the C#.NET library 'sweden_crs_transformations_4net' (https://github.com/TomasJohansson/sweden_crs_transformations_4net)
-* which in turn is based on 'MightyLittleGeodesy' (https://github.com/bjornsallarp/MightyLittleGeodesy/) 
+* and the Dart library 'sweden_crs_transformations_4dart' (https://github.com/TomasJohansson/sweden_crs_transformations_4dart)
+* Both above libraries are based on the C#.NET library 'MightyLittleGeodesy' (https://github.com/bjornsallarp/MightyLittleGeodesy/) 
 * which is also released with MIT.
-* License information about 'sweden_crs_transformations_4dart' and 'MightyLittleGeodesy':
-* https://github.com/TomasJohansson/sweden_crs_transformations_4dart/blob/dart_SwedenCrsTransformations/LICENSE
-* For more information see the webpage below.
-* https://github.com/TomasJohansson/sweden_crs_transformations_4dart
+* License information about 'sweden_crs_transformations_typescript' and 'MightyLittleGeodesy':
+* https://github.com/TomasJohansson/sweden_crs_transformations_typescript/blob/typescript_SwedenCrsTransformations/LICENSE
 */
+
+// Note that some of the comments below may still refer to a C#.NET or Dart class rather than this TypeScript class
+// (the TypeScript have been 'ported' from corresponding C#/Dart projects, as mentioned above)
+
 
 // This project is based on the library [MightyLittleGeodesy](https://github.com/bjornsallarp/MightyLittleGeodesy/)
 // It started as a fork, but then most of the original code is gone.
@@ -35,8 +38,8 @@
 // For more details about exactly what has changed in this GaussKreuger class, you can also use a git client with "compare" or "blame" features to see the changes)
 
 // Note that *most of* the above changes were copied from the C# project which modified the GaussKreuger class.
-// But later this file has been ported to the programming language Dart, and thus some more modifications,
-// but for those details about what has changed when porting from C# to Dart, please see the git repository with the source code.
+// But later this file has been ported to the programming languages Dart and then also TypeScript.
+// Thus there have been some more modifications, but for those details about what has changed when porting from C# to Dart and TypeScript, please see the git repository with the source code.
 // (also be aware that some further updates may have been made in the Dart project without being mentioned above in the above comments that mostly was copied from the C# library)
 
 // ------------------------------------------------------------------------------------------
@@ -80,11 +83,12 @@
   * Author: Björn Sållarp. 2009. http://blog.sallarp.com
   * 
   * Modifications in this file were made 2021 by Tomas Johansson, first in a C# project.
-  * But later more changes of course when it was ported to the programming language Dart in this source file.
+  * But later more changes of course when it was ported to the programming language Dart,
+  * and then later to TypeScript as in this ."ts" source file.
   * For details about changes, you should be able to use the github repository to see the git history where you found this source code file.
   */
 
- import CrsProjection from '../crs_projection';
+import CrsProjection from '../crs_projection';
 import LatLon from './lat_lon';
 
 type double = number;
@@ -98,12 +102,14 @@ export default class GaussKreuger
   private _false_northing: double = 0.0; // Offset for origo.
   private _false_easting: double = 0.0; // Offset for origo.
 
-  /// Parameters for RT90 and SWEREF99TM.
-  /// Note: Parameters for RT90 are choosen to eliminate the 
-  /// differences between Bessel and GRS80-ellipsoides.
-  /// Bessel-variants should only be used if lat/long are given as
-  /// RT90-lat/long based on the Bessel ellipsoide (from old maps).
-  /// Parameter: projection (string). Must match if-statement.
+  /**
+   * Parameters for RT90 and SWEREF99TM.
+   * Note: Parameters for RT90 are choosen to eliminate the 
+   * differences between Bessel and GRS80-ellipsoides.
+   * Bessel-variants should only be used if lat/long are given as
+   * RT90-lat/long based on the Bessel ellipsoide (from old maps).
+   * Parameter: projection (string). Must match if-statement.
+   */
   swedish_params(projection: CrsProjection): void
   {
     // RT90 parameters, GRS 80 ellipsoid.
@@ -231,7 +237,7 @@ export default class GaussKreuger
     }
   }
 
-  /// Sets of default parameters.
+  /** Sets of default parameters. */
   _grs80_params(): void
   {
     this._axis = 6378137.0; // GRS 80.
@@ -239,7 +245,7 @@ export default class GaussKreuger
     this._central_meridian = Number.MIN_VALUE;
   }
 
-  /// Sets default parameters for sweref99.
+  /** Sets default parameters for sweref99. */
   _sweref99_params(): void
   {
     this._axis = 6378137.0; // GRS 80.
@@ -250,7 +256,7 @@ export default class GaussKreuger
     this._false_easting = 150000.0;
   }
 
-  /// Conversion from geodetic coordinates to grid coordinates.
+  /** Conversion from geodetic coordinates to grid coordinates. */
   geodetic_to_grid(latitude: double, longitude: double): LatLon // public double[] geodetic_to_grid(double latitude, double longitude)
   {
     const x_y: Array<double> = [0.0, 0.0];
@@ -298,7 +304,7 @@ export default class GaussKreuger
     return new LatLon(x_y[0], x_y[1]);
   }
 
-  /// Conversion from grid coordinates to geodetic coordinates.
+  /** Conversion from grid coordinates to geodetic coordinates. */
   grid_to_geodetic(yLatitude: double, xLongitude: double): LatLon // public double[] grid_to_geodetic(double yLatitude, double xLongitude)
   {
     if (this._central_meridian == Number.MIN_VALUE)

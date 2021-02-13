@@ -1,14 +1,13 @@
 ﻿/*
-// TODO update the below Dart comments for this TypeScript project (ported from Dart/C#)
+* https://github.com/TomasJohansson/sweden_crs_transformations_typescript
 * Copyright (c) Tomas Johansson , http://www.programmerare.com
-* The code in this library is licensed with MIT.
+* The code in this 'sweden_crs_transformations_typescript' library is licensed with MIT.
 * The library is based on the C#.NET library 'sweden_crs_transformations_4net' (https://github.com/TomasJohansson/sweden_crs_transformations_4net)
-* which in turn is based on 'MightyLittleGeodesy' (https://github.com/bjornsallarp/MightyLittleGeodesy/) 
+* and the Dart library 'sweden_crs_transformations_4dart' (https://github.com/TomasJohansson/sweden_crs_transformations_4dart)
+* Both above libraries are based on the C#.NET library 'MightyLittleGeodesy' (https://github.com/bjornsallarp/MightyLittleGeodesy/) 
 * which is also released with MIT.
-* License information about 'sweden_crs_transformations_4dart' and 'MightyLittleGeodesy':
-* https://github.com/TomasJohansson/sweden_crs_transformations_4dart/blob/dart_SwedenCrsTransformations/LICENSE
-* For more information see the webpage below.
-* https://github.com/TomasJohansson/sweden_crs_transformations_4dart
+* License information about 'sweden_crs_transformations_typescript' and 'MightyLittleGeodesy':
+* https://github.com/TomasJohansson/sweden_crs_transformations_typescript/blob/typescript_SwedenCrsTransformations/LICENSE
 */
 
 import CrsCoordinate from '../crs_coordinate';
@@ -18,20 +17,27 @@ import TransformStrategy_from_SWEREF99_or_RT90_to_WGS84 from './transform_strate
 import TransformStrategy_from_WGS84_to_SWEREF99_or_RT90 from './transform_strategy_from_wgs84_to_sweref99_or_rt90';
 import TransFormStrategy_From_Sweref99OrRT90_to_WGS84_andThenToRealTarget from './transform_strategy_from_sweref99_or_rt90_to_wgs84_and_then_to_real_target';
 
-/// Intended to be an internal class, i.e. not exported from the library (i.e. in the file 'sweden_crs_transformations_4dart.dart')
+/** 
+ * Intended to be an internal class, i.e. not exported from the library
+ * (i.e. not exported from the file 'src/index.ts') 
+ */
 export default class Transformer {
 
-  // Implementations of transformations from WGS84:
+  /** Implementation of transformations from WGS84 */
   private static readonly _transformStrategy_from_WGS84_to_SWEREF99_or_RT90: TransformStrategy = new TransformStrategy_from_WGS84_to_SWEREF99_or_RT90();
 
-  // Implementations of transformations to WGS84:
+  /** Implementation of transformations to WGS84 */
   private static readonly _transformStrategy_from_SWEREF99_or_RT90_to_WGS84: TransformStrategy = new TransformStrategy_from_SWEREF99_or_RT90_to_WGS84();
 
-  // Implementation first transforming to WGS84 and then to the real target:
+  /** Implementation first transforming to WGS84 and then to the real target */
   private static readonly _transFormStrategy_From_Sweref99OrRT90_to_WGS84_andThenToRealTarget: TransformStrategy  = new TransFormStrategy_From_Sweref99OrRT90_to_WGS84_andThenToRealTarget();
 
-  /// Transforms a [sourceCoordinate] (which includes the coordinate reference system as a property)
-  /// to a coordinate in another coordinate reference system i.e. the [targetCrsProjection]
+  /**
+   * Transforms a source {@link CrsCoordinate} (which includes the coordinate reference system as a property)
+   * to a coordinate in another coordinate reference system i.e. the target {@link CrsProjection}
+   * @param sourceCoordinate - The coordinate to become transformed.
+   * @param targetCrsProjection - The coordinate reference system you want to transform to.
+   */
   static transform(sourceCoordinate: CrsCoordinate, targetCrsProjection: CrsProjection): CrsCoordinate {
     if(sourceCoordinate.crsProjection == targetCrsProjection) return sourceCoordinate;
 
