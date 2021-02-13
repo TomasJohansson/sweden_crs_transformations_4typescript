@@ -15,6 +15,11 @@ the mathematical logic has still been kept from the original 'MightyLittleGeodes
 
 No. At least not yet. Maybe later.
 
+# Implementations in other programming languages
+Currently I have implemented this TypeScript library also with the following programming languages and github repositories:   
+C#.NET: [sweden_crs_transformations_4net](https://github.com/TomasJohansson/sweden_crs_transformations_4net)   
+Dart: [sweden_crs_transformations_4dart](https://github.com/TomasJohansson/sweden_crs_transformations_4dart)   
+
 # Code example using TypeScript (pasted below from 'example_typescript_console\src\index.ts')
 ```typescript
 import {CrsProjection, CrsCoordinate} from 'sweden_crs_transformations_4typescript';
