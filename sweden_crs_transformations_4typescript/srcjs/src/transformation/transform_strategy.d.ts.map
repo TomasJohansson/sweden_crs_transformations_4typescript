@@ -1,0 +1,1 @@
+{"version":3,"file":"transform_strategy.d.ts","sourceRoot":"","sources":["../../../src/transformation/transform_strategy.ts"],"names":[],"mappings":"AAYA,OAAO,aAAa,MAAM,mBAAmB,CAAC;AAC9C,OAAO,aAAa,MAAM,mBAAmB,CAAC;AAE9C;;;GAGG;AACH,MAAM,CAAC,OAAO,WAAW,iBAAiB;IAExC,eAAe;IACf,SAAS,CACP,gBAAgB,EAAE,aAAa,EAC/B,mBAAmB,EAAE,aAAa,GACjC,aAAa,CAAC;CAClB"}

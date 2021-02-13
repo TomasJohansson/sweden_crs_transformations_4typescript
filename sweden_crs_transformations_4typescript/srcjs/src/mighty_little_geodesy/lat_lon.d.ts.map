@@ -1,0 +1,1 @@
+{"version":3,"file":"lat_lon.d.ts","sourceRoot":"","sources":["../../../src/mighty_little_geodesy/lat_lon.ts"],"names":[],"mappings":"AAYA;;;;GAIG;AACH,MAAM,CAAC,OAAO,OAAO,MAAM;IAEvB,QAAQ,CAAC,SAAS,EAAE,MAAM;IAC1B,QAAQ,CAAC,UAAU,EAAE,MAAM;gBADlB,SAAS,EAAE,MAAM,EACjB,UAAU,EAAE,MAAM;CAE9B"}
