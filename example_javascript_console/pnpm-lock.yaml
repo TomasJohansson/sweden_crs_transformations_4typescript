@@ -2,4 +2,4 @@ dependencies:
   sweden_crs_transformations_4typescript: link:../sweden_crs_transformations_4typescript
 lockfileVersion: 5.2
 specifiers:
-  sweden_crs_transformations_4typescript: link:..\sweden_crs_transformations_4typescript
+  sweden_crs_transformations_4typescript: link:../sweden_crs_transformations_4typescript

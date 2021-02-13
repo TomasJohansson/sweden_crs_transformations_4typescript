@@ -10,4 +10,4 @@ packages:
       integrity: sha512-6qO6XcxGqPqCpv9wkNlhUe113Nbkw82lfeJJLDLojPbcSRBfzHWJT8T7z9sGCeYPr5dtBM10xSs6NOVjxi35rQ==
 specifiers:
   core-js-bundle: ^3.8.3
-  sweden_crs_transformations_4typescript: link:..\sweden_crs_transformations_4typescript
+  sweden_crs_transformations_4typescript: link:../sweden_crs_transformations_4typescript
