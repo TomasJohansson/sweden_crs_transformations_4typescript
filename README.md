@@ -19,7 +19,7 @@ No. At least not yet. Maybe later.
 
 Further down in this section you can se a block of commands you can run if you want.  
 
-It is assumed that you have installed [git](https://git-scm.com/) and [pnpm](https://pnpm.js.orginstallation) (and also [npm](https://www.npmjs.com/get-npm) which can be used to [install pnpm](https://pnpm.js.org/en/installation) if you not already have installed pnpm).
+It is assumed that you have installed [git](https://git-scm.com/) and [pnpm](https://pnpm.js.org) (and also [npm](https://www.npmjs.com/get-npm) which can be used to [install pnpm](https://pnpm.js.org/en/installation) if you not already have installed pnpm).
 
 Below are some commands you can use from a command prompt.  
 The below *"[YOUR_ROOT_DIRECTORY_FOR_THE_CLONED_GIT_REPOSITORY]"* represents something like 
