@@ -121,10 +121,8 @@ Luleå Station;65.584141;22.164724;7290667
     <!-- polyfill "core-js-bundle" below, makes it work in IE 11 too -->
     <script src="./node_modules/core-js-bundle/index.js"></script>
 
-    <!-- defines 'sweden_crs_transformations' used in the script further down -->
-    <!-- <script src="./node_modules/sweden_crs_transformations_4typescript/dist/swed_crs_transform_bundled_with_webpack.js"></script> -->
-    <!-- <script src="./node_modules/sweden_crs_transformations_4typescript/dist/swed_crs_transform_bundled_with_webpack__babel_es5.js"></script> -->
-    <script src="./node_modules/sweden_crs_transformations_4typescript/dist/swed_crs_transform_bundled_with_webpack__babel_es5_prod.js"></script>
+    <!-- defines 'library_sweden_crs_transformations_4typescript' used in the script further down -->
+    <script src="./node_modules/sweden_crs_transformations_4typescript/dist/sweden_crs_transformations_4typescript.min.js"></script>
     
 
     <!-- defines the function 'initializeSelectListsAndButtons' used in the script further down -->
@@ -132,7 +130,8 @@ Luleå Station;65.584141;22.164724;7290667
 
     <script>
         window.onload = function load() {
-            initializeSelectListsAndButtons(sweden_crs_transformations);
+            // the function parameter below is a global variable defined by a script included above ("sweden_crs_transformations_4typescript.min.js")
+            initializeSelectListsAndButtons(library_sweden_crs_transformations_4typescript);
         };        
         
         

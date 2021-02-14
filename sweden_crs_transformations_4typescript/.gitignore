@@ -82,7 +82,9 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+
+dist/*.js
+!dist/sweden_crs_transformations_4typescript.min.js
 
 # Gatsby files
 .cache/

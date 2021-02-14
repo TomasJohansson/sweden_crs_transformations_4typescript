@@ -191,6 +191,8 @@ function swapTextFields(textInput1, textInput2) {
     textInput2.value = temp;
 }
 
+// the input parameter 'crsModule' should be the global variable 'library_sweden_crs_transformations_4typescript' 
+// which is exposed by the javascript bundle file 'sweden_crs_transformations_4typescript/dist/sweden_crs_transformations_4typescript.min.js'
 function initializeSelectListsAndButtons(crsModule) {
     var buttonTransform1 = document.getElementById("buttonTransform1");
     var buttonTransform2 = document.getElementById("buttonTransform2");

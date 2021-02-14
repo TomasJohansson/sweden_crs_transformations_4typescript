@@ -9,7 +9,7 @@
     "babprod": "babel dist/swed_crs_transform_bundled_with_webpack.js --out-file dist/swed_crs_transform_bundled_with_webpack__babel_es5_prod.js --presets minify",
     "TODO": "try to reduce the above duplication and try to reuse the output filename in webpack.config.js",
     "dev": "webpack --mode development && npm run babdev",
-    "prod": "webpack --mode production && npm run babprod",
+    "prod": "webpack --mode production && npm run babprod && fse-cli copy dist/swed_crs_transform_bundled_with_webpack__babel_es5_prod.js dist/sweden_crs_transformations_4typescript.min.js && tsc",
     "test": "jest"
   },
   "repository": {
@@ -22,6 +22,7 @@
   "author": "Tomas Johansson (https://programmerare.com/)",
   "license": "MIT",
   "devDependencies": {
+    "@atao60/fse-cli": "^0.0.53",
     "@babel/cli": "^7.12.16",
     "@babel/core": "^7.12.16",
     "@babel/preset-env": "^7.12.16",

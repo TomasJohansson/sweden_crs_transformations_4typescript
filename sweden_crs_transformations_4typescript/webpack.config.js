@@ -16,11 +16,11 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
   },
-  devtool: 'eval-source-map',
+  // devtool: 'eval-source-map',
   output: {
     publicPath: 'dist',
     filename: '[name]_bundled_with_webpack.js',
     path: path.resolve(__dirname, 'dist'),
-    library: 'sweden_crs_transformations'
+    library: 'library_sweden_crs_transformations_4typescript'
   },
 };
