@@ -5,11 +5,20 @@
   "main": "./srcjs/src/index.js",
   "types": "./srcjs/src/index.d.ts",
   "scripts": {
+    "TODO": "try to reduce the duplications in these npm scripts e.g. try to reuse the output filename in webpack.config.js",    
+
     "babdev": "babel dist/swed_crs_transform_bundled_with_webpack.js --out-file dist/swed_crs_transform_bundled_with_webpack__babel_es5.js",
     "babprod": "babel dist/swed_crs_transform_bundled_with_webpack.js --out-file dist/swed_crs_transform_bundled_with_webpack__babel_es5_prod.js --presets minify",
-    "TODO": "try to reduce the above duplication and try to reuse the output filename in webpack.config.js",
-    "dev": "webpack --mode development && npm run babdev",
-    "prod": "webpack --mode production && npm run babprod && fse-cli copy dist/swed_crs_transform_bundled_with_webpack__babel_es5_prod.js dist/sweden_crs_transformations_4typescript.min.js && tsc",
+
+    "copy_to_dist": "fse-cli copy dist/swed_crs_transform_bundled_with_webpack__babel_es5_prod.js dist/sweden_crs_transformations_4typescript.min.js",
+
+    "copy_to_githubpages_TODO_better": "TODO: improve the script at the below row which copies four files to ../docs/browser_example/ ",
+    "copy_to_githubpages": "fse-cli copy ../example_javascript_browser_bundle/index.htm  ../docs/browser_example/index.htm && fse-cli copy ../example_javascript_browser_bundle/javascript_sample.js  ../docs/browser_example/javascript_sample.js  && fse-cli copy dist/sweden_crs_transformations_4typescript.min.js ../docs/browser_example/node_modules/sweden_crs_transformations_4typescript/dist/sweden_crs_transformations_4typescript.min.js &&  fse-cli copy ../example_javascript_browser_bundle/node_modules/core-js-bundle/index.js ../docs/browser_example/node_modules/core-js-bundle/index.js",
+
+    "prod": "webpack --mode production && pnpm run babprod && pnpm run copy_to_dist && pnpm run copy_to_githubpages && pnpx tsc",
+
+    "dev": "webpack --mode development && pnpm run babdev",
+    
     "test": "jest"
   },
   "repository": {

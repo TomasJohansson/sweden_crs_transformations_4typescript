@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form style="text-align: center;">
+        <table>
+            <tr>
+                <td>
+                    Coordinate Reference System:
+                    <br />
+                    <select id="selectEpsg1"></select> <!-- populated with javascript -->
+                    <br />
+
+                    Separator between x/Longitude and y/Latitude:
+                    <br />
+                    e.g. ';' or ',' or '|'' or ' '(space)
+                    <br />
+                    <input type="text" value=";" id="inputCoordinateSeparator1" />
+                    <br />
+
+
+                    When the below text area with coordinates is used as output, the only allowed 
+                    values below are 1 and 2.
+                    <br />
+
+                    Column for x/Longitude:
+                    <br />
+                    <input type="number" id="inputColumnForXLongitude1" value="3"/>
+                    <br />                    
+                    
+                    Column for y/Latitude:
+                    <br />
+                    <input type="number" id="inputColumnForYLatitude1" value="2" />
+
+                    <p>
+                        <input type="button" value=" Swap above X/Y fields " id="buttonSwap1">
+                    </p>                                        
+
+
+                    Coordinates:
+                    <br />                                        
+<!-- https://github.com/TomasJohansson/crsTransformations/blob/master/crs-transformation-adapter-test/src/test/resources/coordinatesForSweden.csv -->
+                    <textarea  id="textareaWithCoordinates1" rows="30" cols="80">
+Stockholm Centralstation;59.330231;18.059196
+Göteborg Centralstation;57.708538;11.973295
+Malmö Centralstation;55.608796;12.999305
+Uppsala Centralstation;59.858658;17.646017
+Linköping Centralstation;58.416183;15.624184
+Västerås Centralstation;59.607767;16.551665
+Örebro Centralstation;59.278643;15.211837
+Norrköping Centralstation;58.5964;16.18432
+Umeå Centralstation;63.829921;20.266843
+Lund Centralstation;55.70519;13.187199
+Gävle Centralstation;60.675759;17.150989
+Sundsvall Centralstation;62.386874;17.315614
+Karlstad Centralstation;59.378194;13.499319
+Luleå Station;65.584141;22.164724;7290667
+Östersund station;63.178996;14.631107
+                    </textarea>
+
+                </td>
+                <!-- above: column 1 / 3 -->
+                <!-- below: column 2 / 3 -->
+                <td>
+                    <p>
+                        <input type="button" value=" Transform ==&gt; " id="buttonTransform1">
+                    </p>
+                    <p>
+                        <input type="button" value=" &lt;== Transform " id="buttonTransform2">
+                    </p>
+                </td>                
+                <!-- below: column 3 / 3 -->
+                <td>
+                    Coordinate Reference System:
+                    <br />                    
+                    <select id="selectEpsg2"></select> <!-- populated with javascript -->
+                    <br />
+
+                    Separator between x/Longitude and y/Latitude:
+                    <br />
+                    e.g. ';' or ',' or '|'' or ' '(space)
+                    <br />
+                    <input type="text" value=";" id="inputCoordinateSeparator2" />
+                    <br />                    
+
+                    When the below text area with coordinates is used as output, the only allowed 
+                    values below are 1 and 2.
+                    <br />                    
+
+                    Column for x/Longitude:
+                    <br />
+                    <input type="number" id="inputColumnForXLongitude2" value="2"/>
+                    <br />
+
+                    Column for y/Latitude:
+                    <br />
+                    <input type="number" id="inputColumnForYLatitude2" value="1" />
+
+                    <p>
+                        <input type="button" value=" Swap above X/Y fields " id="buttonSwap2">
+                    </p>                    
+
+                    Coordinates:
+                    <br />                    
+                    <textarea  id="textareaWithCoordinates2" rows="30" cols="80"></textarea>
+                    <br />                    
+                </td>                
+            </tr>
+        </table>
+    </form>
+    
+    <div id="errorMessage" style="color:red; text-align: center;">
+    </div>
+
+
+    <!-- polyfill "core-js-bundle" below, makes it work in IE 11 too -->
+    <script src="./node_modules/core-js-bundle/index.js"></script>
+
+    <!-- defines 'library_sweden_crs_transformations_4typescript' used in the script further down -->
+    <script src="./node_modules/sweden_crs_transformations_4typescript/dist/sweden_crs_transformations_4typescript.min.js"></script>
+    
+
+    <!-- defines the function 'initializeSelectListsAndButtons' used in the script further down -->
+    <script src="./javascript_sample.js"></script>
+
+    <script>
+        window.onload = function load() {
+            // the function parameter below is a global variable defined by a script included above ("sweden_crs_transformations_4typescript.min.js")
+            initializeSelectListsAndButtons(library_sweden_crs_transformations_4typescript);
+        };        
+        
+        
+        // Below is also some example usage of the above library 'sweden_crs_transformations' (exposed by a node module above)
+        // which might be enabled (by removing the comments block) if you want to try using it.
+        /*
+        var swe = sweden_crs_transformations; // shorter alias for the global variabel exposed by a node module above
+
+        var allProjections = swe.CrsProjection.getAllCrsProjections();
+        for(var crsProjection of allProjections) {
+            document.write("<br>crsProjection: " + "EPSG:" + crsProjection.getEpsgNumber());
+        }
+        var epsgNumberForWgs84 = swe.CrsProjection.wgs84.getEpsgNumber();
+        var epsgNumberForSweref99tm = swe.CrsProjection.sweref_99_tm.getEpsgNumber();
+        document.write("<br>EPSG number for CrsProjection WGS84: " + epsgNumberForWgs84);
+        document.write("<br>EPSG number for CrsProjection SWEREF99 TM: " + epsgNumberForSweref99tm);
+        var coordinateWGS84 = swe.CrsCoordinate.createCoordinate(
+            swe.CrsProjection.wgs84,
+            59.330231,  // latitude,      
+            18.059196   // longitude
+        );
+        var coordinateSweref99tm = coordinateWGS84.transform(swe.CrsProjection.sweref_99_tm);
+        document.write("<br>coordinateSweref99tm X / Y : " + coordinateSweref99tm.xLongitude + " , " + coordinateSweref99tm.yLatitude);
+        */
+    </script>
+</body>
+</html>
