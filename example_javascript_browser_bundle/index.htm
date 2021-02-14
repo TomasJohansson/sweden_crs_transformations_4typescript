@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>sweden_crs_transformations_4typescript example</title>
 </head>
 <body>
-    
+    Example page showing usage of the TypeScript library <a href="https://github.com/TomasJohansson/sweden_crs_transformations_4typescript">sweden_crs_transformations_4typescript</a>.
+    <br />
+    This page is <b>NOT</b> using any kind of javascript framework (such as React, Angular, Vue) nor any CSS framework (such as Bootstrap or Tailwind), and in fact uses almost no CSS at all.
+    <br />
+    The purpose of this page is just to illustrate usage of a library (see more comments below at the bottom of this page).
+    <hr />    
     <form style="text-align: center;">
         <table>
             <tr>
@@ -45,7 +50,7 @@
                     Coordinates:
                     <br />                                        
 <!-- https://github.com/TomasJohansson/crsTransformations/blob/master/crs-transformation-adapter-test/src/test/resources/coordinatesForSweden.csv -->
-                    <textarea  id="textareaWithCoordinates1" rows="30" cols="80">
+                    <textarea  id="textareaWithCoordinates1" rows="20" cols="50">
 Stockholm Centralstation;59.330231;18.059196
 Göteborg Centralstation;57.708538;11.973295
 Malmö Centralstation;55.608796;12.999305
@@ -107,7 +112,7 @@ Luleå Station;65.584141;22.164724;7290667
 
                     Coordinates:
                     <br />                    
-                    <textarea  id="textareaWithCoordinates2" rows="30" cols="80"></textarea>
+                    <textarea  id="textareaWithCoordinates2" rows="20" cols="50"></textarea>
                     <br />                    
                 </td>                
             </tr>
@@ -157,5 +162,32 @@ Luleå Station;65.584141;22.164724;7290667
         document.write("<br>coordinateSweref99tm X / Y : " + coordinateSweref99tm.xLongitude + " , " + coordinateSweref99tm.yLatitude);
         */
     </script>
+
+<hr />
+This is just a simple example webpage with the purpose to illustrate how to use the javascript bundle file "sweden_crs_transformations_4typescript.min.js"
+(created by the TypeScript library <a href="https://github.com/TomasJohansson/sweden_crs_transformations_4typescript">sweden_crs_transformations_4typescript</a>) 
+which is included within the html script tag in this webpage.  
+<br />
+That bundled javascript file exposes a global variable "library_sweden_crs_transformations_4typescript"
+which in turn provides access to the following two TypeScript classes (which has been transpiled into javascript in the above mentioned javascript file):
+<ul>
+    <li>
+        <a href="https://github.com/TomasJohansson/sweden_crs_transformations_4typescript/blob/typescript_SwedenCrsTransformations/sweden_crs_transformations_4typescript/src/crs_projection.ts">CrsProjection</a>
+    </li>
+    <li>
+        <a href="https://github.com/TomasJohansson/sweden_crs_transformations_4typescript/blob/typescript_SwedenCrsTransformations/sweden_crs_transformations_4typescript/src/crs_coordinate.ts">CrsCoordinate</a>
+    </li>
+</ul>
+Then this webpage use those two classes (CrsProjection and CrsCoordinate) from within the javascript file 
+<a href="https://github.com/TomasJohansson/sweden_crs_transformations_4typescript/blob/typescript_SwedenCrsTransformations/example_javascript_browser_bundle/javascript_sample.js">javascript_sample.js</a> which is also included within this webpage.
+<br />
+There is also a third javascript file included in this webpage, the so called polyfill "core-js-bundle"
+which enables this webpage to work also with an older web browser such as Internet Explorer 11.
+<br /><br />
+
+This webpage has been tested (successfully) with three web browsers for Windows 10 
+(Chrome 88, Firefox 85 and Internet Explorer 11)
+and three web browsers for Linux Ubuntu 20.04 (Chrome 88, Firefox 85, Opera 74).
+
 </body>
 </html>
