@@ -15,12 +15,76 @@ the mathematical logic has still been kept from the original 'MightyLittleGeodes
 
 No. At least not yet. Maybe later.
 
+# How to use this git repository
+
+Further down in this section you can se a block of commands you can run if you want.  
+
+It is assumed that you have installed [git](https://git-scm.com/) and [pnpm](https://pnpm.js.orginstallation) (and also [npm](https://www.npmjs.com/get-npm) which can be used to [install pnpm](https://pnpm.js.org/en/installation) if you not already have installed pnpm).
+
+Below are some commands you can use from a command prompt.  
+The below *"[YOUR_ROOT_DIRECTORY_FOR_THE_CLONED_GIT_REPOSITORY]"* represents something like 
+*"/home/tomas/sweden_crs_transformations_4typescript"* if you would be using Linux with the user name *"tomas"* and would create the git clone into that directory.
+
+The below commands *"pnpm install"* installs *"dependencies"* and *"devDependencies"* defined in *"package.json"* into the subdirectories *"node_modules"*.  
+(but since **p**npm is used, there will not be as much disk space used as when *npm* is used)
+
+The below command *"pnpm run test"* will run all [TypeScript jest tests](https://jestjs.io/docs/en/getting-started#using-typescript) in the directory "sweden_crs_transformations_4typescript/*test*" which are testing the TypeScript code in the directory "sweden_crs_transformations_4typescript/*src*".  
+The directory "sweden_crs_transformations_4typescript/*srcjs*" contains code generated from the TypeScript *"tsc"* command, e.g. when running the command *"pnpx tsc"*.  
+In other words, the code in the *src* directory is written but the code in *srcjs* is generated and copied from *src*.  
+
+The below command *"pnpm run start"* in the both example modules *"example_typescript_console"* and *"example_javascript_console"* will simply show how to use the library *"sweden_crs_transformations_4typescript"* from a TypeScript module and from a JavaScript module.  
+They run the same code as is shown here in this github page in the section with code example.  
+
+When you have run the below command *"pnpm install"* within the module *"example_javascript_browser_bundle"*, the result should be a subdirectory *"node_modules"* which includes some files referred to from the page "example_javascript_browser_bundle/*index.htm*".  
+Then you should be able to open that "*index.htm*" file from a web browser, and it is a simple old-fashioned webpage (i.e. *NOT* using any modern frameworks such as React/Angular/Vue) with some javascript code using the generated bundled javascript file.  
+
+Since the *"prod"* script in *"sweden_crs_transformations_4typescript/package.json"* copies the needed files to *"github pages"* of this github repository, you can also see that webpage here:  
+[https://tomasjohansson.github.io/sweden_crs_transformations_4typescript/browser_example/](https://tomasjohansson.github.io/sweden_crs_transformations_4typescript/browser_example/)
+
+```shell-script
+git clone https://github.com/TomasJohansson/sweden_crs_transformations_4typescript
+
+cd [YOUR_ROOT_DIRECTORY_FOR_THE_CLONED_GIT_REPOSITORY]
+cd sweden_crs_transformations_4typescript
+pnpm install
+pnpm run test
+
+cd [YOUR_ROOT_DIRECTORY_FOR_THE_CLONED_GIT_REPOSITORY]
+cd example_typescript_console
+pnpm install
+pnpm run start
+
+cd [YOUR_ROOT_DIRECTORY_FOR_THE_CLONED_GIT_REPOSITORY]
+cd example_javascript_console
+pnpm install
+pnpm run start
+
+cd [YOUR_ROOT_DIRECTORY_FOR_THE_CLONED_GIT_REPOSITORY]
+cd example_javascript_browser_bundle
+pnpm install
+```
+
+The code in this library (e.g. using the commands above) has been tested with the following operating systems and versions of *node*, *npm* and *pnpm*:  
+
+Windows 10:  
+"node -v" ==> v14.15.4  
+"npm -v" ==> 6.14.11  
+"pnpm -v" ==> 5.17.1  
+
+Linux Ubuntu 20.04:  
+"node -v" ==> v14.15.5  
+"npm -v" ==> 6.14.11  
+"pnpm -v" ==> 5.17.1  
+
+
 # Implementations in other programming languages
 Currently I have implemented this TypeScript library also with the following programming languages and github repositories:   
 C#.NET: [sweden_crs_transformations_4net](https://github.com/TomasJohansson/sweden_crs_transformations_4net)   
 Dart: [sweden_crs_transformations_4dart](https://github.com/TomasJohansson/sweden_crs_transformations_4dart)   
 
-# Code example using TypeScript (pasted below from 'example_typescript_console\src\index.ts')
+# Code example using TypeScript 
+
+(pasted below from 'example_typescript_console\src\index.ts')
 ```typescript
 import {CrsProjection, CrsCoordinate} from 'sweden_crs_transformations_4typescript';
 
