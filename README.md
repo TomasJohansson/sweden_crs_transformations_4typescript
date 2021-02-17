@@ -29,8 +29,8 @@ The below commands *"pnpm install"* installs *"dependencies"* and *"devDependenc
 (but since **p**npm is used, there will not be as much disk space used as when *npm* is used)
 
 The below command *"pnpm run test"* will run all [TypeScript jest tests](https://jestjs.io/docs/en/getting-started#using-typescript) in the directory "sweden_crs_transformations_4typescript/*test*" which are testing the TypeScript code in the directory "sweden_crs_transformations_4typescript/*src*".  
-The directory "sweden_crs_transformations_4typescript/*srcjs*" contains code generated from the TypeScript *"tsc"* command, e.g. when running the command *"pnpx tsc"*.  
-In other words, the code in the *src* directory is written but the code in *srcjs* is generated and copied from *src*.  
+The directory "sweden_crs_transformations_4typescript/*src_generated*" contains code generated from the TypeScript *"tsc"* command, e.g. when running the command *"pnpx tsc"*.  
+In other words, the code in the *src* directory is written but the code in *src_generated* is generated and copied from *src*.  
 
 The below command *"pnpm run start"* in the both example modules *"example_typescript_console"* and *"example_javascript_console"* will simply show how to use the library *"sweden_crs_transformations_4typescript"* from a TypeScript module and from a JavaScript module.  
 They run the same code as is shown here in this github page in the section with code example.  
