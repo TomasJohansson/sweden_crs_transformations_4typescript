@@ -9,7 +9,7 @@
   "author": "Tomas Johansson",
   "license": "ISC",
   "dependencies": {
-    "core-js-bundle": "^3.8.3",
-    "sweden_crs_transformations_4typescript": "link:../sweden_crs_transformations_4typescript"
+    "@programmerare/sweden_crs_transformations": "^1.0.0",
+    "core-js-bundle": "^3.8.3"
   }
 }

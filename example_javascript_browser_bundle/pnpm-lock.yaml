@@ -1,13 +1,17 @@
 dependencies:
+  '@programmerare/sweden_crs_transformations': 1.0.0
   core-js-bundle: 3.8.3
-  sweden_crs_transformations_4typescript: link:../sweden_crs_transformations_4typescript
 lockfileVersion: 5.2
 packages:
+  /@programmerare/sweden_crs_transformations/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-tGgdtDObjUMVEVGv7dBaoit9UZS65oofm2WKyfChQAM98ivYPplis2fQVQ8TsGrC7Lbh16OBn+U7N+/uAtsvKQ==
   /core-js-bundle/3.8.3:
     dev: false
     requiresBuild: true
     resolution:
       integrity: sha512-6qO6XcxGqPqCpv9wkNlhUe113Nbkw82lfeJJLDLojPbcSRBfzHWJT8T7z9sGCeYPr5dtBM10xSs6NOVjxi35rQ==
 specifiers:
+  '@programmerare/sweden_crs_transformations': ^1.0.0
   core-js-bundle: ^3.8.3
-  sweden_crs_transformations_4typescript: link:../sweden_crs_transformations_4typescript
