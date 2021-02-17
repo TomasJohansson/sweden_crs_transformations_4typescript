@@ -13,7 +13,54 @@ the mathematical logic has still been kept from the original 'MightyLittleGeodes
 
 # npm release
 
-No. At least not yet. Maybe later.
+```shell-script
+pnpm install @programmerare/sweden_crs_transformations
+```
+or
+```shell-script
+npm install @programmerare/sweden_crs_transformations
+```
+
+Then you can use this kind of code from a TypeScript module:
+```typescript
+import {CrsProjection, CrsCoordinate} from '@programmerare/sweden_crs_transformations';
+const coordinate_WGS84_latitude = 59.330231;
+const coordinate_WGS84_longitude = 18.059196;
+// the below explicit type ': CrsCoordinate' is optional to specify
+const coordinate_WGS84: CrsCoordinate = CrsCoordinate.createCoordinate(
+    CrsProjection.wgs84,
+    coordinate_WGS84_latitude,      
+    coordinate_WGS84_longitude
+);
+// the below explicit type ': CrsCoordinate' is optional to specify
+const coordinate_SWEREF99TM: CrsCoordinate = coordinate_WGS84.transform(CrsProjection.sweref_99_tm);
+console.log(`SWEREF99TM X: ${coordinate_SWEREF99TM.xLongitude}`);
+console.log(`SWEREF99TM Y: ${coordinate_SWEREF99TM.yLatitude}`);
+```
+You can use almost the same code as above (if you skip the above optional typing) from a JavaScript [Node.js](https://nodejs.org) module, if you are using *"type": "module"* in your file 'package.json', assuming that you are also using a recent version of '*Node.js*'.  
+("type":"module" should work with [Node.js versions 13.2.0 and later](https://nodejs.medium.com/announcing-core-node-js-support-for-ecmascript-modules-c5d6dc29b663))  
+An alternative for JavaScript, if you are not using *"type": "module"*  is to use the *require* syntax instead as below:
+
+```javascript
+const {CrsProjection, CrsCoordinate} = require("@programmerare/sweden_crs_transformations");
+// Above row: if you are NOT using "type":"module" in your "package.json"
+// Below row: if you ARE using "type":"module" in your "package.json"
+//import {CrsProjection, CrsCoordinate} from '@programmerare/sweden_crs_transformations';
+
+const coordinate_WGS84_latitude = 59.330231;
+const coordinate_WGS84_longitude = 18.059196;
+const coordinate_WGS84 = CrsCoordinate.createCoordinate(
+    CrsProjection.wgs84,
+    coordinate_WGS84_latitude,      
+    coordinate_WGS84_longitude
+);
+const coordinate_SWEREF99TM = coordinate_WGS84.transform(CrsProjection.sweref_99_tm);
+console.log(`SWEREF99TM X: ${coordinate_SWEREF99TM.xLongitude}`);
+console.log(`SWEREF99TM Y: ${coordinate_SWEREF99TM.yLatitude}`);
+```
+
+[https://www.npmjs.com/package/@programmerare/sweden_crs_transformations](https://www.npmjs.com/package/@programmerare/sweden_crs_transformations)  
+
 
 # How to use this git repository
 
@@ -39,7 +86,9 @@ When you have run the below command *"pnpm install"* within the module *"example
 Then you should be able to open that "*index.htm*" file from a web browser, and it is a simple old-fashioned webpage (i.e. *NOT* using any modern frameworks such as React/Angular/Vue) with some javascript code using the generated bundled javascript file.  
 
 Since the *"prod"* script in *"sweden_crs_transformations_4typescript/package.json"* copies the needed files to *"github pages"* of this github repository, you can also see that webpage here:  
-[https://tomasjohansson.github.io/sweden_crs_transformations_4typescript/browser_example/](https://tomasjohansson.github.io/sweden_crs_transformations_4typescript/browser_example/)
+[https://tomasjohansson.github.io/sweden_crs_transformations_4typescript/browser_example/](https://tomasjohansson.github.io/sweden_crs_transformations_4typescript/browser_example/)  
+
+The below three 'example_' directories are using the npm package ['@programmerare/sweden_crs_transformations'](https://www.npmjs.com/package/@programmerare/sweden_crs_transformations)  
 
 ```shell-script
 git clone https://github.com/TomasJohansson/sweden_crs_transformations_4typescript
