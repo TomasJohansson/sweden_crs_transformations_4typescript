@@ -1,6 +1,6 @@
 {
   "name": "@programmerare/sweden_crs_transformations",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "TypeScript/JavaScript library for transformation of geographic coordinates between WGS84 and the Swedish coordinate reference systems SWEREF99 and RT90",
   "main": "./src_generated/src/index.js",
   "types": "./src_generated/src/index.d.ts",
