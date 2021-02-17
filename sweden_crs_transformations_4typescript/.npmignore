@@ -1,0 +1,9 @@
+.cache/
+src_generated/test/**
+test/**
+jest.config.js
+webpack.config.js
+babel.config.json
+tsconfig.json
+dist/*.js
+!dist/sweden_crs_transformations_4typescript.min.js
